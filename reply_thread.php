@@ -23,6 +23,6 @@
 	mysql_query($new_post); 
 	$page_num = ceil($total_posts / 12);
 
-	header("Location: post.php?page=$page_num");
+	header("Location: post.php");
 	die();	
 ?>

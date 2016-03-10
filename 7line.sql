@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 28, 2016 at 12:21 AM
+-- Generation Time: Mar 10, 2016 at 09:07 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -49,6 +49,84 @@ INSERT INTO `boards` (`board_id`, `board_name`, `description`, `icon`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `likes`
+--
+
+CREATE TABLE IF NOT EXISTS `likes` (
+  `post_id` double NOT NULL,
+  `user` varchar(50) NOT NULL,
+  PRIMARY KEY (`post_id`,`user`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`post_id`, `user`) VALUES
+(1, 'robcurry12'),
+(5, 'robcurry12'),
+(7, 'robcurry12'),
+(8, 'robcurry12'),
+(33, 'chrislinguini56'),
+(33, 'robcurry12'),
+(39, 'chrislinguini56'),
+(39, 'robcurry12'),
+(40, 'chrislinguini56'),
+(40, 'robcurry12'),
+(41, 'chrislinguini56'),
+(41, 'robcurry12'),
+(44, 'chrislinguini56'),
+(44, 'robcurry12'),
+(46, 'chrislinguini56'),
+(46, 'robcurry12'),
+(47, 'robcurry12'),
+(48, 'robcurry12'),
+(51, 'robcurry12'),
+(59, 'robcurry12'),
+(61, 'chrislinguini56'),
+(65, 'robcurry12'),
+(68, 'robcurry12'),
+(71, 'alexbraunx3'),
+(71, 'joeyg_hd'),
+(71, 'robcurry12'),
+(72, 'alexbraunx3'),
+(72, 'joeyg_hd'),
+(73, 'chrislinguini56'),
+(74, 'alexbraunx3'),
+(74, 'joeyg_hd'),
+(75, 'joeyg_hd');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `polls`
+--
+
+CREATE TABLE IF NOT EXISTS `polls` (
+  `poll_id` int(11) NOT NULL AUTO_INCREMENT,
+  `thread_id` int(11) NOT NULL,
+  `user` varchar(100) NOT NULL,
+  `question` varchar(200) NOT NULL,
+  `option1` varchar(100) NOT NULL,
+  `option2` varchar(100) NOT NULL,
+  `option3` varchar(100) NOT NULL,
+  `option4` varchar(100) NOT NULL,
+  PRIMARY KEY (`poll_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `polls`
+--
+
+INSERT INTO `polls` (`poll_id`, `thread_id`, `user`, `question`, `option1`, `option2`, `option3`, `option4`) VALUES
+(5, 38, 'robcurry12', 'Did I finally get polling fixed?', 'Yes', 'No', 'Give up!', ''),
+(6, 39, 'robcurry12', 'Is Tyler hot?', 'Yes', 'Of course', '', ''),
+(7, 40, 'robcurry12', '', '', '', '', ''),
+(8, 41, 'robcurry12', 'Who is the best Mets starters?', 'Matt Harvey', 'Noah Syndergaard', 'Jacob DeGrom', 'Steven Matz');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `posts`
 --
 
@@ -60,58 +138,78 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `content` longtext NOT NULL,
   `user_create` varchar(30) NOT NULL,
   `date_created` datetime NOT NULL,
+  `type` varchar(100) NOT NULL,
   PRIMARY KEY (`post_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `thread_id`, `board_id`, `subject`, `content`, `user_create`, `date_created`) VALUES
-(1, 7, 2, 'Trying out my new posting method', 'Woohoo hope this works!fhsdfsdgfsdfjsdfsdfsdcvsdbcdgfsdvfhjsgfsdyfhsdgfhsdchjsdchbsdhvsdg hvjhsdvsdghjcvsdghcsdvcghhbdhbsdhjvbsdgvfdsvbchjdshcsdcvsdbc sdcbsdvsdbsghsdncvbsdhvsdcvsghcvsbcvscbscbsvc sbc jshbcdhjsbchjsdb csdghcb sn sjbcsdhjcbhjsdbc s', 'robcurry12', '2016-02-13 10:43:03'),
-(2, 7, 2, '', 'Yay! It seems one method works! Hopefully the reply method works!', 'robcurry12', '2016-02-16 23:41:38'),
-(3, 7, 2, '', 'Hi Tyler!', 'robcurry12', '2016-02-17 13:27:10'),
-(4, 7, 2, '', 'Hi again tyler!', 'robcurry12', '2016-02-17 13:31:07'),
-(5, 7, 2, '', 'Hello Eeveryone!', 'robcurry12', '2016-02-17 13:32:32'),
-(7, 7, 2, '', 'DSFDGFSDF', 'robcurry12', '2016-02-17 13:53:01'),
-(8, 7, 2, '', 'fsdgshfhsdfhsdgf', 'robcurry12', '2016-02-17 13:53:19'),
-(9, 7, 2, '', 'die() better do its damn job', 'robcurry12', '2016-02-17 14:03:55'),
-(10, 7, 2, '', 'Jquery to the resuce!', 'robcurry12', '2016-02-17 14:05:33'),
-(11, 7, 2, '', 'woOOPWOOP', 'robcurry12', '2016-02-17 14:08:57'),
-(12, 7, 2, '', 'Wallabingbang', 'robcurry12', '2016-02-17 14:11:45'),
-(13, 7, 2, '', 'Hopefully thisd oes it!', 'robcurry12', '2016-02-17 14:38:04'),
-(14, 7, 2, '', 'Nope i dont think so', 'robcurry12', '2016-02-17 14:39:07'),
-(15, 7, 2, '', 'YES!', 'robcurry12', '2016-02-17 14:39:39'),
-(16, 7, 2, '', 'bLAH!', 'robcurry12', '2016-02-17 14:39:54'),
-(17, 7, 2, '', 'woopiez!', 'robcurry12', '2016-02-17 14:40:53'),
-(18, 7, 2, '', 'Yay!', 'robcurry12', '2016-02-17 14:41:34'),
-(19, 7, 2, '', 'I did it!', 'robcurry12', '2016-02-17 20:33:11'),
-(20, 7, 2, '', 'Hi', 'robcurry12', '2016-02-18 16:03:31'),
-(21, 9, 2, 'Filling up the board', 'Hello', 'robcurry12', '2016-02-21 14:34:12'),
-(22, 10, 2, 'I am lost and not sure where to start', 'Help me out', 'robcurry12', '2016-02-21 14:45:44'),
-(23, 11, 2, 'I am lost ', 'help', 'robcurry12', '2016-02-21 15:44:04'),
-(24, 12, 2, 'Meow', 'I am a cat', 'robcurry12', '2016-02-21 15:51:57'),
-(25, 13, 2, 'undefined', 'I like to eat pizza! What about you?! I like goats! Baaaaahhh', 'robcurry12', '2016-02-21 17:12:46'),
-(26, 14, 2, 'undefined', 'Can someone take my seat at an upcoming game?', 'robcurry12', '2016-02-22 13:03:54'),
-(27, 15, 2, 'undefined', 'Big bag of potatos', 'robcurry12', '2016-02-22 13:10:25'),
-(28, 16, 2, 'undefined', 'Lets Go Mets!', 'robcurry12', '2016-02-22 13:11:24'),
-(29, 17, 2, 'undefined', 'Rawr', 'robcurry12', '2016-02-22 13:13:30'),
-(30, 18, 2, 'Attempting to see whats wrong', 'Hi there!', 'robcurry12', '2016-02-22 13:57:17'),
-(31, 19, 2, 'Now let me try it in Chrome!', 'This worked in firefox now hopefully it works in CHROME', 'robcurry12', '2016-02-22 13:57:52'),
-(32, 20, 2, 'Testing how long posts will look', '012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789', 'robcurry12', '2016-02-22 15:20:46'),
-(33, 21, 2, 'Testing the length of the post', 'dfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjd', 'robcurry12', '2016-02-22 15:38:36'),
-(34, 7, 2, '', 'Hi', 'robcurry12', '2016-02-23 14:59:02'),
-(35, 7, 2, '', 'Hi again', 'robcurry12', '2016-02-23 15:01:15'),
-(38, 22, 3, '', 'Posting reply!', 'robcurry12', '2016-02-23 20:28:40'),
-(39, 21, 2, '', 'Hi there', 'robcurry12', '2016-02-26 17:42:16'),
-(40, 21, 2, '', 'hllooo', 'robcurry12', '2016-02-26 17:47:37'),
-(41, 21, 2, '', 'This is odd', 'robcurry12', '2016-02-26 17:51:00'),
-(44, 21, 2, '', 'Woohwoop', 'robcurry12', '2016-02-26 18:15:22'),
-(46, 21, 2, '', 'SDFDSFSD', 'robcurry12', '2016-02-26 18:20:04'),
-(47, 21, 2, '', 'SDFSDF', 'robcurry12', '2016-02-26 18:20:42'),
-(48, 21, 2, '', 'Ew', 'robcurry12', '2016-02-26 18:21:28'),
-(49, 7, 2, '', 'dfd', 'robcurry12', '2016-02-26 18:22:24'),
-(50, 7, 2, '', 'box', 'robcurry12', '2016-02-26 18:24:12');
+INSERT INTO `posts` (`post_id`, `thread_id`, `board_id`, `subject`, `content`, `user_create`, `date_created`, `type`) VALUES
+(1, 7, 2, 'Trying out my new posting method', 'Woohoo hope this works!fhsdfsdgfsdfjsdfsdfsdcvsdbcdgfsdvfhjsgfsdyfhsdgfhsdchjsdchbsdhvsdg hvjhsdvsdghjcvsdghcsdvcghhbdhbsdhjvbsdgvfdsvbchjdshcsdcvsdbc sdcbsdvsdbsghsdncvbsdhvsdcvsghcvsbcvscbscbsvc sbc jshbcdhjsbchjsdb csdghcb sn sjbcsdhjcbhjsdbc s', 'robcurry12', '2016-02-13 10:43:03', ''),
+(2, 7, 2, '', 'Yay! It seems one method works! Hopefully the reply method works!', 'robcurry12', '2016-02-16 23:41:38', ''),
+(3, 7, 2, '', 'Hi Tyler!', 'robcurry12', '2016-02-17 13:27:10', ''),
+(4, 7, 2, '', 'Hi again tyler!', 'robcurry12', '2016-02-17 13:31:07', ''),
+(5, 7, 2, '', 'Hello Eeveryone!', 'robcurry12', '2016-02-17 13:32:32', ''),
+(7, 7, 2, '', 'DSFDGFSDF', 'robcurry12', '2016-02-17 13:53:01', ''),
+(8, 7, 2, '', 'fsdgshfhsdfhsdgf', 'robcurry12', '2016-02-17 13:53:19', ''),
+(9, 7, 2, '', 'die() better do its damn job', 'robcurry12', '2016-02-17 14:03:55', ''),
+(10, 7, 2, '', 'Jquery to the resuce!', 'robcurry12', '2016-02-17 14:05:33', ''),
+(11, 7, 2, '', 'woOOPWOOP', 'robcurry12', '2016-02-17 14:08:57', ''),
+(12, 7, 2, '', 'Wallabingbang', 'robcurry12', '2016-02-17 14:11:45', ''),
+(13, 7, 2, '', 'Hopefully thisd oes it!', 'robcurry12', '2016-02-17 14:38:04', ''),
+(14, 7, 2, '', 'Nope i dont think so', 'robcurry12', '2016-02-17 14:39:07', ''),
+(15, 7, 2, '', 'YES!', 'robcurry12', '2016-02-17 14:39:39', ''),
+(16, 7, 2, '', 'bLAH!', 'robcurry12', '2016-02-17 14:39:54', ''),
+(17, 7, 2, '', 'woopiez!', 'robcurry12', '2016-02-17 14:40:53', ''),
+(18, 7, 2, '', 'Yay!', 'robcurry12', '2016-02-17 14:41:34', ''),
+(19, 7, 2, '', 'I did it!', 'robcurry12', '2016-02-17 20:33:11', ''),
+(20, 7, 2, '', 'Hi', 'robcurry12', '2016-02-18 16:03:31', ''),
+(21, 9, 2, 'Filling up the board', 'Hello', 'robcurry12', '2016-02-21 14:34:12', ''),
+(22, 10, 2, 'I am lost and not sure where to start', 'Help me out', 'robcurry12', '2016-02-21 14:45:44', ''),
+(23, 11, 2, 'I am lost ', 'help', 'robcurry12', '2016-02-21 15:44:04', ''),
+(24, 12, 2, 'Meow', 'I am a cat', 'robcurry12', '2016-02-21 15:51:57', ''),
+(25, 13, 2, 'undefined', 'I like to eat pizza! What about you?! I like goats! Baaaaahhh', 'robcurry12', '2016-02-21 17:12:46', ''),
+(26, 14, 2, 'undefined', 'Can someone take my seat at an upcoming game?', 'robcurry12', '2016-02-22 13:03:54', ''),
+(27, 15, 2, 'undefined', 'Big bag of potatos', 'robcurry12', '2016-02-22 13:10:25', ''),
+(28, 16, 2, 'undefined', 'Lets Go Mets!', 'robcurry12', '2016-02-22 13:11:24', ''),
+(29, 17, 2, 'undefined', 'Rawr', 'robcurry12', '2016-02-22 13:13:30', ''),
+(30, 18, 2, 'Attempting to see whats wrong', 'Hi there!', 'robcurry12', '2016-02-22 13:57:17', ''),
+(31, 19, 2, 'Now let me try it in Chrome!', 'This worked in firefox now hopefully it works in CHROME', 'robcurry12', '2016-02-22 13:57:52', ''),
+(32, 20, 2, 'Testing how long posts will look', '012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789', 'robcurry12', '2016-02-22 15:20:46', ''),
+(33, 21, 2, 'Testing the length of the post', 'dfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjd', 'robcurry12', '2016-02-22 15:38:36', ''),
+(34, 7, 2, '', 'Hi', 'robcurry12', '2016-02-23 14:59:02', ''),
+(35, 7, 2, '', 'Hi again', 'robcurry12', '2016-02-23 15:01:15', ''),
+(39, 21, 2, '', 'Hi there', 'robcurry12', '2016-02-26 17:42:16', ''),
+(40, 21, 2, '', 'hllooo', 'robcurry12', '2016-02-26 17:47:37', ''),
+(41, 21, 2, '', 'This is odd', 'robcurry12', '2016-02-26 17:51:00', ''),
+(44, 21, 2, '', 'Woohwoop', 'robcurry12', '2016-02-26 18:15:22', ''),
+(46, 21, 2, '', 'SDFDSFSD', 'robcurry12', '2016-02-26 18:20:04', ''),
+(47, 21, 2, '', 'SDFSDF', 'robcurry12', '2016-02-26 18:20:42', ''),
+(48, 21, 2, '', 'Ew', 'robcurry12', '2016-02-26 18:21:28', ''),
+(49, 7, 2, '', 'dfd', 'robcurry12', '2016-02-26 18:22:24', ''),
+(50, 7, 2, '', 'box', 'robcurry12', '2016-02-26 18:24:12', ''),
+(51, 21, 2, '', '123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890', 'robcurry12', '2016-03-03 13:32:41', ''),
+(52, 22, 1, 'Outing Travel Tips Post #1', 'Hi all!', 'robcurry12', '2016-03-08 15:23:22', ''),
+(53, 23, 1, 'Mow Mow', 'Mow Mow', 'robcurry12', '2016-03-09 10:29:48', ''),
+(54, 24, 1, 'Meow', 'Meoooowww', 'robcurry12', '2016-03-09 10:38:04', ''),
+(55, 25, 4, 'Here is a poll', 'Poll', 'robcurry12', '2016-03-09 10:41:28', ''),
+(56, 26, 3, 'La Leche', 'The Milk', 'robcurry12', '2016-03-09 10:43:42', ''),
+(57, 27, 4, 'Here is another poll', 'Vote vote vote!', 'robcurry12', '2016-03-09 11:19:35', ''),
+(58, 28, 4, 'Tickets up fpr grabs?', 'Idk about this', 'robcurry12', '2016-03-09 11:22:49', ''),
+(59, 29, 1, 'Mike Trout', 'Mike Trout should be a met', 'robcurry12', '2016-03-09 11:56:32', ''),
+(60, 30, 4, 'Missing hash tags ugh', 'Cant believe i missed hashtags', 'robcurry12', '2016-03-09 12:04:38', ''),
+(61, 31, 1, 'Does Bryce Harper suck', 'YES HE DOES!', 'robcurry12', '2016-03-09 12:06:57', ''),
+(62, 32, 3, 'Lets Go Mets', 'Beat the Yankees today', 'robcurry12', '2016-03-09 12:31:02', ''),
+(65, 35, 4, 'Missed Game', 'Can I gET A REFUND!', 'robcurry12', '2016-03-09 12:50:28', ''),
+(68, 38, 3, 'Bro', 'Broo', 'robcurry12', '2016-03-09 13:02:55', 'poll'),
+(69, 39, 3, 'Answer the question ladies', 'Do it', 'robcurry12', '2016-03-09 13:28:08', 'poll'),
+(71, 41, 2, '4 Aces', 'Who would you want', 'robcurry12', '2016-03-09 22:33:29', 'poll'),
+(72, 41, 2, '', 'Madison Bumgarner!', 'chrislinguini56', '2016-03-10 13:47:28', ''),
+(73, 31, 1, '', 'HUNTER PENCE RULES!', 'chrislinguini56', '2016-03-10 13:56:48', ''),
+(74, 41, 2, '', 'DeGrom! I really like his hair', 'alexbraunx3', '2016-03-10 15:20:26', ''),
+(75, 41, 2, '', 'You gotta rep LI bro! #LetsGoMatz', 'joeyg_hd', '2016-03-10 15:50:57', '');
 
 -- --------------------------------------------------------
 
@@ -126,27 +224,43 @@ CREATE TABLE IF NOT EXISTS `threads` (
   `user_create` varchar(100) NOT NULL,
   `last_update` datetime NOT NULL,
   `date_created` datetime NOT NULL,
+  `type` varchar(100) NOT NULL,
   PRIMARY KEY (`thread_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
 
 --
 -- Dumping data for table `threads`
 --
 
-INSERT INTO `threads` (`thread_id`, `board_id`, `subject`, `user_create`, `last_update`, `date_created`) VALUES
-(7, 2, 'Trying out my new posting method', 'robcurry12', '2016-02-13 10:43:03', '2016-02-13 10:43:03'),
-(9, 2, 'Filling up the board', 'robcurry12', '2016-02-21 14:34:12', '2016-02-21 14:34:12'),
-(10, 2, 'I am lost and not sure where to start', 'robcurry12', '2016-02-21 14:45:44', '2016-02-21 14:45:44'),
-(11, 2, 'I am lost ', 'robcurry12', '2016-02-21 15:44:04', '2016-02-21 15:44:04'),
-(12, 2, 'Meow', 'robcurry12', '2016-02-21 15:51:57', '2016-02-21 15:51:57'),
-(13, 2, 'undefined', 'robcurry12', '2016-02-21 17:12:46', '2016-02-21 17:12:46'),
-(14, 2, 'undefined', 'robcurry12', '2016-02-22 13:03:54', '2016-02-22 13:03:54'),
-(15, 2, 'undefined', 'robcurry12', '2016-02-22 13:10:25', '2016-02-22 13:10:25'),
-(16, 2, 'undefined', 'robcurry12', '2016-02-22 13:11:24', '2016-02-22 13:11:24'),
-(17, 2, 'undefined', 'robcurry12', '2016-02-22 13:13:30', '2016-02-22 13:13:30'),
-(18, 2, 'Attempting to see whats wrong', 'robcurry12', '2016-02-22 13:57:17', '2016-02-22 13:57:17'),
-(19, 2, 'Now let me try it in Chrome!', 'robcurry12', '2016-02-22 13:57:52', '2016-02-22 13:57:52'),
-(21, 2, 'Testing the length of the post', 'robcurry12', '2016-02-22 15:38:36', '2016-02-22 15:38:36');
+INSERT INTO `threads` (`thread_id`, `board_id`, `subject`, `user_create`, `last_update`, `date_created`, `type`) VALUES
+(7, 2, 'Trying out my new posting method', 'robcurry12', '2016-02-13 10:43:03', '2016-02-13 10:43:03', ''),
+(9, 2, 'Filling up the board', 'robcurry12', '2016-02-21 14:34:12', '2016-02-21 14:34:12', ''),
+(10, 2, 'I am lost and not sure where to start', 'robcurry12', '2016-02-21 14:45:44', '2016-02-21 14:45:44', ''),
+(11, 2, 'I am lost ', 'robcurry12', '2016-02-21 15:44:04', '2016-02-21 15:44:04', ''),
+(12, 2, 'Meow', 'robcurry12', '2016-02-21 15:51:57', '2016-02-21 15:51:57', ''),
+(13, 2, 'undefined', 'robcurry12', '2016-02-21 17:12:46', '2016-02-21 17:12:46', ''),
+(14, 2, 'undefined', 'robcurry12', '2016-02-22 13:03:54', '2016-02-22 13:03:54', ''),
+(15, 2, 'undefined', 'robcurry12', '2016-02-22 13:10:25', '2016-02-22 13:10:25', ''),
+(16, 2, 'undefined', 'robcurry12', '2016-02-22 13:11:24', '2016-02-22 13:11:24', ''),
+(17, 2, 'undefined', 'robcurry12', '2016-02-22 13:13:30', '2016-02-22 13:13:30', ''),
+(18, 2, 'Attempting to see whats wrong', 'robcurry12', '2016-02-22 13:57:17', '2016-02-22 13:57:17', ''),
+(19, 2, 'Now let me try it in Chrome!', 'robcurry12', '2016-02-22 13:57:52', '2016-02-22 13:57:52', ''),
+(21, 2, 'Testing the length of the post', 'robcurry12', '2016-02-22 15:38:36', '2016-02-22 15:38:36', ''),
+(22, 1, 'Outing Travel Tips Post #1', 'robcurry12', '2016-03-08 15:23:21', '2016-03-08 15:23:21', ''),
+(23, 1, 'Mow Mow', 'robcurry12', '2016-03-09 10:29:48', '2016-03-09 10:29:48', ''),
+(24, 1, 'Meow', 'robcurry12', '2016-03-09 10:38:04', '2016-03-09 10:38:04', ''),
+(25, 4, 'Here is a poll', 'robcurry12', '2016-03-09 10:41:28', '2016-03-09 10:41:28', ''),
+(26, 3, 'La Leche', 'robcurry12', '2016-03-09 10:43:42', '2016-03-09 10:43:42', ''),
+(27, 4, 'Here is another poll', 'robcurry12', '2016-03-09 11:19:35', '2016-03-09 11:19:35', ''),
+(28, 4, 'Tickets up fpr grabs?', 'robcurry12', '2016-03-09 11:22:49', '2016-03-09 11:22:49', ''),
+(29, 1, 'Mike Trout', 'robcurry12', '2016-03-09 11:56:31', '2016-03-09 11:56:31', ''),
+(30, 4, 'Missing hash tags ugh', 'robcurry12', '2016-03-09 12:04:37', '2016-03-09 12:04:37', ''),
+(31, 1, 'Does Bryce Harper suck', 'robcurry12', '2016-03-09 12:06:57', '2016-03-09 12:06:57', ''),
+(32, 3, 'Lets Go Mets', 'robcurry12', '2016-03-09 12:31:02', '2016-03-09 12:31:02', ''),
+(35, 4, 'Missed Game', 'robcurry12', '2016-03-09 12:50:28', '2016-03-09 12:50:28', ''),
+(38, 3, 'Bro', 'robcurry12', '2016-03-09 13:02:55', '2016-03-09 13:02:55', 'poll'),
+(39, 3, 'Answer the question ladies', 'robcurry12', '2016-03-09 13:28:08', '2016-03-09 13:28:08', 'poll'),
+(41, 2, '4 Aces', 'robcurry12', '2016-03-09 22:33:29', '2016-03-09 22:33:29', 'poll');
 
 -- --------------------------------------------------------
 
@@ -166,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `birthday` varchar(5) DEFAULT NULL,
   `gender` varchar(8) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `users`
@@ -188,7 +302,37 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `last_active`, `logg
 (14, 'nym', 'nym@mets.com', 'e10adc3949ba59abbe56', '2016-01-28 21:56:16', 1, NULL, '2016-01-28', '0000-', ''),
 (15, 'yoisback', 'yoisback@mets.com', 'e10adc3949ba59abbe56', '2016-01-28 21:58:08', 1, NULL, '2016-01-28', '0000-', ''),
 (16, 'captainamerica', 'nyca@mets.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-29 15:37:39', 1, NULL, '2016-01-28', '0000-', ''),
-(18, 'robcurry12', 'robcurry12@gmail.com', '0422eeda16890d9fdf17c472fc600297', '2016-02-27 19:20:49', 1, 'robcurry12.jpg', '2016-01-29', '06/19', 'male');
+(18, 'robcurry12', 'robcurry12@gmail.com', '0422eeda16890d9fdf17c472fc600297', '2016-03-10 11:06:54', 0, 'robcurry12.jpg', '2016-01-29', '06/19', 'male'),
+(19, 'chrislinguini56', 'cxc13@dowling.edu', '20d256a57b9bcf3e6e80f2cf35c9f23e', '2016-03-10 14:38:23', 0, 'chrislinguini56.jpg', '2016-03-10', '03/23', 'male'),
+(20, 'alexbraunx3', 'abraun@gmail.com', '20d256a57b9bcf3e6e80f2cf35c9f23e', '2016-03-10 15:23:46', 0, 'alexbraunx3.jpg', '2016-03-10', NULL, NULL),
+(21, 'joeyg_hd', 'joeyg_hd@gmail.com', '20d256a57b9bcf3e6e80f2cf35c9f23e', '2016-03-10 16:05:19', 1, 'joeyg_hd.jpg', '2016-03-10', '07/08', 'male');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `votes`
+--
+
+CREATE TABLE IF NOT EXISTS `votes` (
+  `vote_id` double NOT NULL AUTO_INCREMENT,
+  `poll_id` int(11) NOT NULL,
+  `user` varchar(25) NOT NULL,
+  `voted_for` int(11) NOT NULL,
+  `date_voted` datetime NOT NULL,
+  PRIMARY KEY (`poll_id`,`user`),
+  UNIQUE KEY `vote_id` (`vote_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+
+--
+-- Dumping data for table `votes`
+--
+
+INSERT INTO `votes` (`vote_id`, `poll_id`, `user`, `voted_for`, `date_voted`) VALUES
+(7, 5, 'robcurry12', 1, '2016-03-09 15:37:27'),
+(30, 8, 'alexbraunx3', 3, '2016-03-10 15:20:12'),
+(27, 8, 'chrislinguini56', 1, '2016-03-10 13:39:37'),
+(31, 8, 'joeyg_hd', 4, '2016-03-10 15:50:44'),
+(22, 8, 'robcurry12', 2, '2016-03-09 22:33:38');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

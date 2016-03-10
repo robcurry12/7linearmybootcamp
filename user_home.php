@@ -57,6 +57,7 @@
 		<li><a href="user_home.php">Home</a></li> <!-- Username, member title, profile, number of posts -->
 		<li><a href="board_home.php">Forum</a></li> <!--- List all of the discussion posts --->
 		<li>Messages</li>
+		<li><a href="the7line.com/shop">Shop</a></li>
 		<li><a href="logout.php">Log Out</a></li>
 	</ul>
 

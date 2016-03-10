@@ -20,18 +20,18 @@ $(document).ready(function()
 		
 		if(dateValid(bday) == false)
 		{
-			$("#bday-result").html("Incorrect format");
+			$("#bday-result").html("<b>Incorrect format</b>");
 			return;
 		}
 		if((bday.charAt(1) == 2) && (bday.charAt(3) == 3) && (bday.charAt(0) == 0))
 		{
-			$("#bday-result").html("Incorrect date");
+			$("#bday-result").html("<b>Incorrect date</b>");
 			return;
 		}
 		if((bday.charAt(1) == 4) && (bday.charAt(4) == 1) || (bday.charAt(1) == 6) && (bday.charAt(4) == 1) || 
 		(bday.charAt(1) == 9) && (bday.charAt(4) == 1) || (bday.charAt(1) == 1) && (bday.charAt(4) == 1) && (bday.charAt(0) == 1))
 		{
-			$("#bday-result").html("Incorrect date");
+			$("#bday-result").html("<b>Incorrect date</b>");
 			return;
 		}
 		else

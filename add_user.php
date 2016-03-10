@@ -14,6 +14,7 @@ $db= "7line"; // Database name
 	$reg_user = stripslashes($reg_user);
 	$reg_email = stripslashes($reg_email);
 	$reg_pass = md5($reg_pass);
+	$reg_image = $reg_user.".jpg";
 	
 	//$players = array('MattHarvey', 'JacobDeGrom', 'NoahSyndergaard', 'Steven Matz', 'DavidWright', 'YoenisCespedes',
 	//'TerryCollins', 'MikePiazza', 'TomSeaver', 'JohanSantana', 'SandyAlderson', 'The7LineArmy', 'BartoloColon', 
@@ -25,11 +26,13 @@ $db= "7line"; // Database name
 		$connection = mysql_connect("$host", "$username", "$password")or die("Cannot connect"); 
 		mysql_select_db("$db")or die("Cannot select DB");
 		
-		$query = 	"INSERT INTO users (username, email, password, last_active, date_join, loggedIN) 
-					VALUES ('$reg_user', '$reg_email', '$reg_pass', NOW(), CURDATE(), 1 )";		
+		$query = 	"INSERT INTO users (username, email, password, image, last_active, date_join, loggedIN) 
+					VALUES ('$reg_user', '$reg_email', '$reg_pass', '$reg_image', NOW(), CURDATE(), 1 )";		
 
 		mysql_query($query);
 		//mail($reg_email, 'Activation Code', $message);
+		
+		copy('images/defaultpro.jpg', 'profile_pics/'.$reg_user.'.jpg');
 		
 		session_start();
 		$_SESSION['loggedin_user'] = $reg_user;

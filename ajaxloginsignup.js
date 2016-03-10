@@ -147,6 +147,7 @@ $(document).ready(function()
 		var confirm = $("#newpass2").val();
 		if(password == confirm)
 		{
+			$("#con_pass-result").html('Passwords match!');
 			pass_match = true;
 		}
 		else
@@ -189,7 +190,7 @@ $(document).ready(function()
 		
 		if((username.length == 0) || (password.length == 0))
 		{
-			$("#signin-result").html('All fields are required');
+			$("#login-result").html('All fields are required');
 			return;
 		}
 		else
@@ -201,10 +202,10 @@ $(document).ready(function()
 	            url: "check_user.php",
 	            success: function(result) 
 	            {
-	                $("#signin-result").html(result);
+	                $("#login-result").html(result);
 	            
 	            
-		            if($("#signin-result").html().length == 0) 
+		            if($("#login-result").html().length == 0) 
 		            {
 	  					window.location.href="login.php";
 	  					return false;
@@ -230,6 +231,7 @@ $(document).ready(function()
 		$("#newemail-result").html('');
 		$("#confirmemail-result").html('');
 		$("#newpass-result").html('');
-		$("#con_pass-result").html('');	
+		$("#con_pass-result").html('');
+		$(".text").val('');	
 	});
 });

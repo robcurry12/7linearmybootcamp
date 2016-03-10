@@ -35,11 +35,11 @@ if(isset($_POST["username"]))
 	//if value is more than 0, username is not available
 	if($user_exist == 1) 
 	{
-		die("<img src='images/not-available.png'/>");
+		die("<img src='images/not-available.png'/> Username not available");
 	}
 	else
 	{
-		die("<img src='images/available.png' />");
+		die("<img src='images/available.png' /> Username available");
 	}
 	
 	//close db connection
@@ -77,11 +77,11 @@ if(isset($_POST["email"]))
 	//if value is more than 0, username is not available
 	if($email_exist >= 1) 
 	{
-		die("<img src='images/not-available.png'/>");
+		die("<img src='images/not-available.png'/> Email already in use");
 	}
 	else
 	{
-		die("<img src='images/available.png'/>");
+		die("<img src='images/available.png'/> Email available");
 	}
 	
 	//close db connection
