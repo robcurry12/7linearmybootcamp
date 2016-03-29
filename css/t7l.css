@@ -623,8 +623,7 @@ body
     cursor: pointer;
 }
 #bd_name
-{
-    
+{  
     font-size: 150%;
     width: 95%;
     margin-top: 5%;
@@ -637,6 +636,12 @@ body
     width: 90%;
     margin-top: 8%;
     font-size: medium;
+}
+#bd_thrd_ct
+{
+   padding: 0;
+   margin: 0;
+   font-size: 75%;
 }
 #board_posts
 {
@@ -911,7 +916,74 @@ body
     margin-right: auto;
     margin-top: 10px;
 }
-
-
-
-
+.poll_thread
+{
+    margin-left: 5px;
+}
+.paging
+{
+    text-align: right;
+    margin-top: 8px;
+}
+.paging a
+{
+    margin-left: 1px;
+    margin-right: 1px;
+    text-decoration: none;
+    color: white;
+    background-color: #F04F23;
+    padding:5px;
+    border: #CDDAD2 1px solid;
+    border-radius: 3px;
+    transition: background-color .5s ease-in;
+    text-align: center;
+}
+.paging a:hover
+{
+    background-color: #32689F;
+}
+.thread_page
+{
+    margin-right: 125px;
+}
+.profile_link
+{
+    text-decoration: none;
+    color: white;
+}
+#profile_info
+{
+    border: 2px solid black;
+    width: 275px;
+    height: 325px;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    background: -moz-linear-gradient(45deg, rgba(30,87,153,1) 0%, rgba(243,121,55,1) 32%, rgba(243,121,55,1) 38%, rgba(243,121,55,1) 46%, rgba(0,71,132,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(45deg, rgba(30,87,153,1) 0%,rgba(243,121,55,1) 32%,rgba(243,121,55,1) 38%,rgba(243,121,55,1) 46%,rgba(0,71,132,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(45deg, rgba(30,87,153,1) 0%,rgba(243,121,55,1) 32%,rgba(243,121,55,1) 38%,rgba(243,121,55,1) 46%,rgba(0,71,132,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    border: 3px solid #FD6124;
+    color: white;
+}
+#profile_info img
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    margin-bottom: 1%;
+}
+#profile_info h3, h4
+{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    text-align: center;
+}
+#profile_info h4
+{
+    font-size: 11px;
+    margin-top: 0;
+}

@@ -182,12 +182,13 @@ $(document).ready(function()
 		var like_count = $("#like_amount-1").val();
 		var post_id = $("#post_id-1").val();
 		var user = $("#user").val();
-		//like_count++;
+		var post_user = $("#quote_user1").val();
+		
 		
 		$.ajax
 			({
 	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count,
+	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
 	            url: "increment_like.php",
 	            success: function(result) 
 	            {
@@ -202,12 +203,12 @@ $(document).ready(function()
 		var like_count = $("#like_amount-2").val();
 		var post_id = $("#post_id-2").val();
 		var user = $("#user").val();
-		like_count++;
+		var post_user = $("#quote_user2").val();
 		
 		$.ajax
 			({
 	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count,
+	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
 	            url: "increment_like.php",
 	            success: function(result) 
 	            {
@@ -222,12 +223,13 @@ $(document).ready(function()
 		var like_count = $("#like_amount-3").val();
 		var post_id = $("#post_id-3").val();
 		var user = $("#user").val();
-		like_count++;
+		var post_user = $("#quote_user3").val();
+		 
 		
 		$.ajax
 			({
 	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count,
+	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
 	            url: "increment_like.php",
 	            success: function(result) 
 	            {
@@ -242,12 +244,13 @@ $(document).ready(function()
 		var like_count = $("#like_amount-4").val();
 		var post_id = $("#post_id-4").val();
 		var user = $("#user").val();
-		like_count++;
+		var post_user = $("#quote_user4").val();
+		 
 		
 		$.ajax
 			({
 	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count,
+	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
 	            url: "increment_like.php",
 	            success: function(result) 
 	            {
@@ -262,12 +265,13 @@ $(document).ready(function()
 		var like_count = $("#like_amount-5").val();
 		var post_id = $("#post_id-5").val();
 		var user = $("#user").val();
-		like_count++;
+		var post_user = $("#quote_user5").val();
+		 
 		
 		$.ajax
 			({
 	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count,
+	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
 	            url: "increment_like.php",
 	            success: function(result) 
 	            {
@@ -282,12 +286,13 @@ $(document).ready(function()
 		var like_count = $("#like_amount-6").val();
 		var post_id = $("#post_id-6").val();
 		var user = $("#user").val();
-		like_count++;
+		var post_user = $("#quote_user6").val();
+		 
 		
 		$.ajax
 			({
 	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count,
+	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
 	            url: "increment_like.php",
 	            success: function(result) 
 	            {
@@ -302,12 +307,13 @@ $(document).ready(function()
 		var like_count = $("#like_amount-7").val();
 		var post_id = $("#post_id-7").val();
 		var user = $("#user").val();
-		like_count++;
+		var post_user = $("#quote_user7").val();
+		 
 		
 		$.ajax
 			({
 	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count,
+	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
 	            url: "increment_like.php",
 	            success: function(result) 
 	            {
@@ -322,12 +328,13 @@ $(document).ready(function()
 		var like_count = $("#like_amount-8").val();
 		var post_id = $("#post_id-8").val();
 		var user = $("#user").val();
-		like_count++;
+		var post_user = $("#quote_user8").val();
+		 
 		
 		$.ajax
 			({
 	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count,
+	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
 	            url: "increment_like.php",
 	            success: function(result) 
 	            {
@@ -342,12 +349,13 @@ $(document).ready(function()
 		var like_count = $("#like_amount-9").val();
 		var post_id = $("#post_id-9").val();
 		var user = $("#user").val();
-		like_count++;
+		var post_user = $("#quote_user9").val();
+		 
 		
 		$.ajax
 			({
 	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count,
+	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
 	            url: "increment_like.php",
 	            success: function(result) 
 	            {
@@ -362,12 +370,13 @@ $(document).ready(function()
 		var like_count = $("#like_amount-10").val();
 		var post_id = $("#post_id-10").val();
 		var user = $("#user").val();
-		like_count++;
+		var post_user = $("#quote_user10").val();
+		 
 		
 		$.ajax
 			({
 	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count,
+	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
 	            url: "increment_like.php",
 	            success: function(result) 
 	            {
@@ -382,12 +391,13 @@ $(document).ready(function()
 		var like_count = $("#like_amount-11").val();
 		var post_id = $("#post_id-11").val();
 		var user = $("#user").val();
-		like_count++;
+		var post_user = $("#quote_user11").val();
+		 
 		
 		$.ajax
 			({
 	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count,
+	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
 	            url: "increment_like.php",
 	            success: function(result) 
 	            {
@@ -402,12 +412,13 @@ $(document).ready(function()
 		var like_count = $("#like_amount-12").val();
 		var post_id = $("#post_id-12").val();
 		var user = $("#user").val();
-		like_count++;
+		var post_user = $("#quote_user12").val();
+		 
 		
 		$.ajax
 			({
 	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count,
+	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
 	            url: "increment_like.php",
 	            success: function(result) 
 	            {

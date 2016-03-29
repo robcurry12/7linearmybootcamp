@@ -1,10 +1,9 @@
-<?php
+<?php 
 	include("session.php"); 
-	$user = $_SESSION['loggedin_user'];
-	
-	//REVISE LATER TO INCLUDE NUMBER OF POSTS
+	$user = $_GET['profile'];
+
 	$info_query = 	"SELECT DATE_FORMAT(date_join, '%c/%e/%y') AS date_join,
-							 birthday, gender, image 
+							 birthday, gender, image, last_active 
 					FROM users 
 					WHERE username = '$user'";
 	
@@ -17,6 +16,13 @@
 						
 	$npq_results = mysqli_query($connection, $num_posts_query);
 	$num_posts = mysqli_fetch_assoc($npq_results);
+	
+	$num_likes_query = "SELECT COUNT(*) as num_likes
+						FROM likes
+						WHERE post_user = '$user' AND user != post_user";
+	
+	$nlq_results = mysqli_query($connection, $num_likes_query);
+	$num_likes = mysqli_fetch_assoc($nlq_results);		
 	
 	//Prevents NULL being displayed for gender
 	if($user_info['birthday'] == NULL)
@@ -35,13 +41,43 @@
 	{
 		$user_info['image'] = "images/defaultpro.jpg";
 	}
+	
+	$right_now = date('n/j/y g:i A');
+	$last_active = date('n/j/y g:i A', strtotime($user_info['last_active']));
+	//*************************
+	//*  Date formatting code *
+	//*************************
+	//date('Y', strtotime('2011-01-01')
+	if(date('y', strtotime($right_now)) == date('y', strtotime($last_active)))										//Year
+	{
+		if(date('n', strtotime($right_now)) == date('n' , strtotime($last_active)))								//Month
+		{
+			if(date('j', strtotime($right_now)) == date('j' , strtotime($last_active)))								//Day
+			{
+				$date_format = 'g:i A';
+			}
+			else 														
+			{
+				$date_format = 'n/j g:i A';
+			}
+		}
+		else 
+		{
+				$date_format = 'n/j g:i A';
+		}
+	}
+	else 
+	{
+		$date_format = 'n/j/y g:i A';
+	}	
+	
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<link rel='shortcut icon' type='favicon.png' href='images/favicon.png'/ >
-	<title><?php echo ucfirst($user)."'s Home Base"; ?></title>
+	<title><?php echo ucfirst($user)."'s Camp "; ?></title>
 	<link rel="stylesheet" href="css/t7l.css" type="text/css">
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -62,35 +98,17 @@
 	</ul>
 
 	<div id="user_home">
-		<div id="user_info">
-		<form enctype="multipart/form-data" action="upload.php" method="post">
+		<div id="profile_info">
 				<img id="home_propic" src="<?php echo 'profile_pics/'.$user_info['image']; ?>" alt="<?php echo $user; ?>">
-				<input class="browse" type="file" id="file1" name="file1"/>
-				<label for="file1" id="upload_btn">Choose a file</label>
-				<span id="photo-result"></span>
-				<input class="profilepic" type="submit" id="upload" value="Change profile picture">
-				<input name="user" type="hidden" value="<?php echo $user ?>" />
-		</form>
+				
 				<h3><?php echo $user; ?></h3>
+				<h4>Last Active: <?php echo date_format(new DateTime($user_info['last_active']), $date_format); ?></h4>
 				<h4>Enlisted since: <?php echo $user_info['date_join']; ?></h4>
 				<h4 class="edit"><?php echo ucfirst($user_info['gender']); ?></h4>
-				<select class="hidden jq_edit" id="gender">
-					<option value="male">Male</option>
-					<option value="female">Female</option>
-				</select>
 				<h4 class="edit"><b>Birthday:</b> <?php echo $user_info['birthday']; ?></h4>	
-				<h4 class="hidden"><input type="text" class="hidden jq_edit" id="bday" value="<?php echo $user_info['birthday']; ?>" maxlength="5" /></h4>	
-				<span id="bday-result"></span>
 				<h4>Number of posts: <?php echo $num_posts['num_posts']; ?></h4>
-				<input id="edit_pro" type="button" value="Edit Profile" class="edit edit_pro" />
-				<input id="save_pro" type="button" value="Save Changes" class="hidden edit_pro" />
-			<input id="username" type="hidden" value="<?php echo $user ?>" />
+				<h4>Post Likes: <?php echo $num_likes['num_likes']; ?></h4>
 		</div>
-		
-		<div>
-			
-		</div>
-		
 	</div>
 </body>
 </html>

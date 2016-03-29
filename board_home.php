@@ -19,8 +19,11 @@
         die("Cannot select DB");
         exit();
     }
-	$board_query = 	"SELECT board_id, board_name, description, icon 
-					FROM boards";
+	$board_query = 	"SELECT board_id, board_name, description, 
+					(SELECT COUNT(t.thread_id)
+					FROM threads t 
+					WHERE t.board_id = b.board_id) as num_threads 
+					FROM boards b";
 				
 	/*$t_ct = mysql_query($thread_count);
 	$t_ct = mysql_fetch_assoc($t_ct);*/
@@ -56,6 +59,7 @@
 			<form action="nav_thread.php" method="get">	
 				<li><div id="board_divs" class="<?php echo "boards".$i; ?>">
 					<input class="link_btn bd_link" id="bd_name" type="submit" value="<?php echo $result['board_name']; ?>"/><br>
+					<input class="link_btn bd_link" id="bd_thrd_ct" type="submit" value="Threads: <?php echo $result['num_threads']; ?>"/><br>
 					<input class="link_btn bd_link" id="bd_desc" type="submit" value="<?php echo $result['description']; ?>"/>
 					<input type="hidden" value="<?php echo $result['board_id']; ?>" name="bd_id" />
 					<input type="hidden" value="<?php echo $result['board_name']; ?>" name="bd_name" />

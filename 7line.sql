@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 4.5.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Mar 10, 2016 at 09:07 PM
--- Server version: 5.6.12-log
--- PHP Version: 5.4.16
+-- Host: 127.0.0.1
+-- Generation Time: Mar 29, 2016 at 02:54 AM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,13 +14,11 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `7line`
 --
-CREATE DATABASE IF NOT EXISTS `7line` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `7line`;
 
 -- --------------------------------------------------------
 
@@ -28,13 +26,12 @@ USE `7line`;
 -- Table structure for table `boards`
 --
 
-CREATE TABLE IF NOT EXISTS `boards` (
-  `board_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `boards` (
+  `board_id` int(11) NOT NULL,
   `board_name` varchar(50) NOT NULL,
   `description` varchar(200) NOT NULL,
-  `icon` varchar(200) NOT NULL,
-  PRIMARY KEY (`board_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `icon` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `boards`
@@ -44,7 +41,7 @@ INSERT INTO `boards` (`board_id`, `board_name`, `description`, `icon`) VALUES
 (1, 'General Discussion', 'Free discussion forum', 'images/icontemp.jpg'),
 (2, 'New Soldiers', 'New 7 Line Soldiers can come here for any questions they might have. One of our loyal soldiers will be sure to help', 'images/icontemp.jpg'),
 (3, 'Outing Travel Tips', 'Post your traveling tips here for any of our away outings', 'images/icontemp.jpg'),
-(4, 'Can''t Make A Game', 'Connect with soldiers to ensure your spot goes to another solider', 'images/icontemp.jpg');
+(4, 'Can\'t Make A Game', 'Connect with soldiers to ensure your spot goes to another solider', 'images/icontemp.jpg');
 
 -- --------------------------------------------------------
 
@@ -52,49 +49,32 @@ INSERT INTO `boards` (`board_id`, `board_name`, `description`, `icon`) VALUES
 -- Table structure for table `likes`
 --
 
-CREATE TABLE IF NOT EXISTS `likes` (
+CREATE TABLE `likes` (
   `post_id` double NOT NULL,
   `user` varchar(50) NOT NULL,
-  PRIMARY KEY (`post_id`,`user`)
+  `post_user` varchar(40) NOT NULL,
+  `time_liked` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `likes`
 --
 
-INSERT INTO `likes` (`post_id`, `user`) VALUES
-(1, 'robcurry12'),
-(5, 'robcurry12'),
-(7, 'robcurry12'),
-(8, 'robcurry12'),
-(33, 'chrislinguini56'),
-(33, 'robcurry12'),
-(39, 'chrislinguini56'),
-(39, 'robcurry12'),
-(40, 'chrislinguini56'),
-(40, 'robcurry12'),
-(41, 'chrislinguini56'),
-(41, 'robcurry12'),
-(44, 'chrislinguini56'),
-(44, 'robcurry12'),
-(46, 'chrislinguini56'),
-(46, 'robcurry12'),
-(47, 'robcurry12'),
-(48, 'robcurry12'),
-(51, 'robcurry12'),
-(59, 'robcurry12'),
-(61, 'chrislinguini56'),
-(65, 'robcurry12'),
-(68, 'robcurry12'),
-(71, 'alexbraunx3'),
-(71, 'joeyg_hd'),
-(71, 'robcurry12'),
-(72, 'alexbraunx3'),
-(72, 'joeyg_hd'),
-(73, 'chrislinguini56'),
-(74, 'alexbraunx3'),
-(74, 'joeyg_hd'),
-(75, 'joeyg_hd');
+INSERT INTO `likes` (`post_id`, `user`, `post_user`, `time_liked`) VALUES
+(71, 'chrislinguini56', 'robcurry12', '2016-03-17 17:58:53'),
+(72, 'chrislinguini56', 'chrislinguini56', '2016-03-17 17:58:55'),
+(72, 'robcurry12', 'chrislinguini56', '2016-03-17 17:59:25'),
+(73, 'robcurry12', 'chrislinguini56', '2016-03-17 19:55:11'),
+(74, 'chrislinguini56', 'alexbraunx3', '2016-03-17 17:58:57'),
+(74, 'robcurry12', 'alexbraunx3', '2016-03-17 17:59:28'),
+(75, 'chrislinguini56', 'joeyg_hd', '2016-03-17 17:58:59'),
+(75, 'robcurry12', 'joeyg_hd', '2016-03-17 17:59:30'),
+(76, 'chrislinguini56', 'robcurry12', '2016-03-17 17:59:01'),
+(76, 'robcurry12', 'robcurry12', '2016-03-17 17:59:31'),
+(77, 'chrislinguini56', 'robcurry12', '2016-03-17 17:59:03'),
+(77, 'robcurry12', 'robcurry12', '2016-03-17 17:59:33'),
+(80, 'robcurry12', 'robcurry12', '2016-03-28 18:02:45'),
+(81, 'robcurry12', 'robcurry12', '2016-03-28 18:02:38');
 
 -- --------------------------------------------------------
 
@@ -102,17 +82,16 @@ INSERT INTO `likes` (`post_id`, `user`) VALUES
 -- Table structure for table `polls`
 --
 
-CREATE TABLE IF NOT EXISTS `polls` (
-  `poll_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `polls` (
+  `poll_id` int(11) NOT NULL,
   `thread_id` int(11) NOT NULL,
   `user` varchar(100) NOT NULL,
   `question` varchar(200) NOT NULL,
   `option1` varchar(100) NOT NULL,
   `option2` varchar(100) NOT NULL,
   `option3` varchar(100) NOT NULL,
-  `option4` varchar(100) NOT NULL,
-  PRIMARY KEY (`poll_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+  `option4` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `polls`
@@ -122,7 +101,8 @@ INSERT INTO `polls` (`poll_id`, `thread_id`, `user`, `question`, `option1`, `opt
 (5, 38, 'robcurry12', 'Did I finally get polling fixed?', 'Yes', 'No', 'Give up!', ''),
 (6, 39, 'robcurry12', 'Is Tyler hot?', 'Yes', 'Of course', '', ''),
 (7, 40, 'robcurry12', '', '', '', '', ''),
-(8, 41, 'robcurry12', 'Who is the best Mets starters?', 'Matt Harvey', 'Noah Syndergaard', 'Jacob DeGrom', 'Steven Matz');
+(8, 41, 'robcurry12', 'Who is the best Mets starters?', 'Matt Harvey', 'Noah Syndergaard', 'Jacob DeGrom', 'Steven Matz'),
+(9, 42, 'robcurry12', 'What shirt do I wear tomorrow', 'Mets', 'None', '', '');
 
 -- --------------------------------------------------------
 
@@ -130,17 +110,16 @@ INSERT INTO `polls` (`poll_id`, `thread_id`, `user`, `question`, `option1`, `opt
 -- Table structure for table `posts`
 --
 
-CREATE TABLE IF NOT EXISTS `posts` (
-  `post_id` double NOT NULL AUTO_INCREMENT,
+CREATE TABLE `posts` (
+  `post_id` double NOT NULL,
   `thread_id` double NOT NULL,
   `board_id` double NOT NULL,
   `subject` varchar(300) NOT NULL,
   `content` longtext NOT NULL,
   `user_create` varchar(30) NOT NULL,
   `date_created` datetime NOT NULL,
-  `type` varchar(100) NOT NULL,
-  PRIMARY KEY (`post_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
+  `type` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `posts`
@@ -209,7 +188,13 @@ INSERT INTO `posts` (`post_id`, `thread_id`, `board_id`, `subject`, `content`, `
 (72, 41, 2, '', 'Madison Bumgarner!', 'chrislinguini56', '2016-03-10 13:47:28', ''),
 (73, 31, 1, '', 'HUNTER PENCE RULES!', 'chrislinguini56', '2016-03-10 13:56:48', ''),
 (74, 41, 2, '', 'DeGrom! I really like his hair', 'alexbraunx3', '2016-03-10 15:20:26', ''),
-(75, 41, 2, '', 'You gotta rep LI bro! #LetsGoMatz', 'joeyg_hd', '2016-03-10 15:50:57', '');
+(75, 41, 2, '', 'You gotta rep LI bro! #LetsGoMatz', 'joeyg_hd', '2016-03-10 15:50:57', ''),
+(76, 41, 2, '', 'Wow its a 4 way tie!', 'robcurry12', '2016-03-14 15:07:59', ''),
+(77, 41, 2, '', 'Here we go!', 'robcurry12', '2016-03-14 15:09:54', ''),
+(78, 19, 2, '', 'Yes it worked!', 'robcurry12', '2016-03-15 18:32:09', ''),
+(79, 42, 2, 'Attire for tomorrow', 'What should I wear?', 'robcurry12', '2016-03-28 13:13:11', 'poll'),
+(80, 43, 2, 'New Recruit Thread', 'Welcome everyone! Here is where you can introduce yourself to The 7 Line Army and meet other 7 Line Soldiers.', 'robcurry12', '2016-03-28 13:14:08', ''),
+(81, 44, 2, 'New Thread', 'New content', 'robcurry12', '2016-03-28 14:02:28', '');
 
 -- --------------------------------------------------------
 
@@ -217,16 +202,15 @@ INSERT INTO `posts` (`post_id`, `thread_id`, `board_id`, `subject`, `content`, `
 -- Table structure for table `threads`
 --
 
-CREATE TABLE IF NOT EXISTS `threads` (
-  `thread_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `threads` (
+  `thread_id` int(11) NOT NULL,
   `board_id` int(200) NOT NULL,
   `subject` varchar(200) NOT NULL,
   `user_create` varchar(100) NOT NULL,
   `last_update` datetime NOT NULL,
   `date_created` datetime NOT NULL,
-  `type` varchar(100) NOT NULL,
-  PRIMARY KEY (`thread_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
+  `type` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `threads`
@@ -260,7 +244,10 @@ INSERT INTO `threads` (`thread_id`, `board_id`, `subject`, `user_create`, `last_
 (35, 4, 'Missed Game', 'robcurry12', '2016-03-09 12:50:28', '2016-03-09 12:50:28', ''),
 (38, 3, 'Bro', 'robcurry12', '2016-03-09 13:02:55', '2016-03-09 13:02:55', 'poll'),
 (39, 3, 'Answer the question ladies', 'robcurry12', '2016-03-09 13:28:08', '2016-03-09 13:28:08', 'poll'),
-(41, 2, '4 Aces', 'robcurry12', '2016-03-09 22:33:29', '2016-03-09 22:33:29', 'poll');
+(41, 2, '4 Aces', 'robcurry12', '2016-03-09 22:33:29', '2016-03-09 22:33:29', 'poll'),
+(42, 2, 'Attire for tomorrow', 'robcurry12', '2016-03-28 13:13:11', '2016-03-28 13:13:11', 'poll'),
+(43, 2, 'New Recruit Thread', 'robcurry12', '2016-03-28 13:14:08', '2016-03-28 13:14:08', 'sticky'),
+(44, 2, 'New Thread', 'robcurry12', '2016-03-28 14:02:28', '2016-03-28 14:02:28', '');
 
 -- --------------------------------------------------------
 
@@ -268,8 +255,8 @@ INSERT INTO `threads` (`thread_id`, `board_id`, `subject`, `user_create`, `last_
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -278,9 +265,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `image` varchar(1000) DEFAULT NULL,
   `date_join` date NOT NULL,
   `birthday` varchar(5) DEFAULT NULL,
-  `gender` varchar(8) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+  `gender` varchar(8) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -302,8 +288,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `last_active`, `logg
 (14, 'nym', 'nym@mets.com', 'e10adc3949ba59abbe56', '2016-01-28 21:56:16', 1, NULL, '2016-01-28', '0000-', ''),
 (15, 'yoisback', 'yoisback@mets.com', 'e10adc3949ba59abbe56', '2016-01-28 21:58:08', 1, NULL, '2016-01-28', '0000-', ''),
 (16, 'captainamerica', 'nyca@mets.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-29 15:37:39', 1, NULL, '2016-01-28', '0000-', ''),
-(18, 'robcurry12', 'robcurry12@gmail.com', '0422eeda16890d9fdf17c472fc600297', '2016-03-10 11:06:54', 0, 'robcurry12.jpg', '2016-01-29', '06/19', 'male'),
-(19, 'chrislinguini56', 'cxc13@dowling.edu', '20d256a57b9bcf3e6e80f2cf35c9f23e', '2016-03-10 14:38:23', 0, 'chrislinguini56.jpg', '2016-03-10', '03/23', 'male'),
+(18, 'robcurry12', 'robcurry12@gmail.com', '0422eeda16890d9fdf17c472fc600297', '2016-03-28 20:37:52', 1, 'robcurry12.jpg', '2016-01-29', '06/19', 'male'),
+(19, 'chrislinguini56', 'cxc13@dowling.edu', '20d256a57b9bcf3e6e80f2cf35c9f23e', '2016-03-17 13:59:07', 0, 'chrislinguini56.jpg', '2016-03-10', '03/23', 'male'),
 (20, 'alexbraunx3', 'abraun@gmail.com', '20d256a57b9bcf3e6e80f2cf35c9f23e', '2016-03-10 15:23:46', 0, 'alexbraunx3.jpg', '2016-03-10', NULL, NULL),
 (21, 'joeyg_hd', 'joeyg_hd@gmail.com', '20d256a57b9bcf3e6e80f2cf35c9f23e', '2016-03-10 16:05:19', 1, 'joeyg_hd.jpg', '2016-03-10', '07/08', 'male');
 
@@ -313,15 +299,13 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `last_active`, `logg
 -- Table structure for table `votes`
 --
 
-CREATE TABLE IF NOT EXISTS `votes` (
-  `vote_id` double NOT NULL AUTO_INCREMENT,
+CREATE TABLE `votes` (
+  `vote_id` double NOT NULL,
   `poll_id` int(11) NOT NULL,
   `user` varchar(25) NOT NULL,
   `voted_for` int(11) NOT NULL,
-  `date_voted` datetime NOT NULL,
-  PRIMARY KEY (`poll_id`,`user`),
-  UNIQUE KEY `vote_id` (`vote_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+  `date_voted` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `votes`
@@ -334,6 +318,87 @@ INSERT INTO `votes` (`vote_id`, `poll_id`, `user`, `voted_for`, `date_voted`) VA
 (31, 8, 'joeyg_hd', 4, '2016-03-10 15:50:44'),
 (22, 8, 'robcurry12', 2, '2016-03-09 22:33:38');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `boards`
+--
+ALTER TABLE `boards`
+  ADD PRIMARY KEY (`board_id`);
+
+--
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`post_id`,`user`);
+
+--
+-- Indexes for table `polls`
+--
+ALTER TABLE `polls`
+  ADD PRIMARY KEY (`poll_id`);
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`post_id`);
+
+--
+-- Indexes for table `threads`
+--
+ALTER TABLE `threads`
+  ADD PRIMARY KEY (`thread_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `votes`
+--
+ALTER TABLE `votes`
+  ADD PRIMARY KEY (`poll_id`,`user`),
+  ADD UNIQUE KEY `vote_id` (`vote_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `boards`
+--
+ALTER TABLE `boards`
+  MODIFY `board_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `polls`
+--
+ALTER TABLE `polls`
+  MODIFY `poll_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `post_id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+--
+-- AUTO_INCREMENT for table `threads`
+--
+ALTER TABLE `threads`
+  MODIFY `thread_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT for table `votes`
+--
+ALTER TABLE `votes`
+  MODIFY `vote_id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

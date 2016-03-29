@@ -13,8 +13,8 @@ if(isset($_POST["username"]))
 	}
 	
 	//try connect to db
-	$connection = mysql_connect($host, $username, $password)or die('could not connect to database');
-	$database = mysql_select_db("$db")or die("Cannot select DB");
+	$connection = mysqli_connect($host, $username, $password, $db)or die('could not connect to database');
+	$database = mysqli_select_db($connection, $db)or die("Cannot select DB");
 	
 	//trim and lowercase username
 	$newuser =  strtolower(trim($_POST["username"])); 
@@ -27,10 +27,10 @@ if(isset($_POST["username"]))
 				FROM users 
 				WHERE username = '$newuser'";
 				
-	$results = mysql_query($query);
+	$results = mysqli_query($connection, $query);
 	
 	//return total count
-	$user_exist = mysql_num_rows($results); //total records
+	$user_exist = mysqli_num_rows($results); //total records
 	
 	//if value is more than 0, username is not available
 	if($user_exist == 1) 
@@ -43,7 +43,7 @@ if(isset($_POST["username"]))
 	}
 	
 	//close db connection
-	mysql_close($connection);
+	mysqli_close($connection);
 }
 
 //check if email exists in db already
@@ -69,10 +69,10 @@ if(isset($_POST["email"]))
 				FROM users 
 				WHERE email = '$newemail'";
 				
-	$results = mysql_query($query);
+	$results = mysqli_query($connection, $query);
 	
 	//return total count
-	$email_exist = mysql_num_rows($results); //total records
+	$email_exist = mysqli_num_rows($results); //total records
 	
 	//if value is more than 0, username is not available
 	if($email_exist >= 1) 
@@ -85,7 +85,7 @@ if(isset($_POST["email"]))
 	}
 	
 	//close db connection
-	mysql_close($connection);
+	mysqli_close($connection);
 }
 
 
@@ -99,8 +99,8 @@ if(isset($_POST['user_sign']) && isset($_POST['pass_sign']))
 	}
 	
 	//try connect to db
-	$connection = mysql_connect($host, $username, $password)or die('could not connect to database');
-	$database = mysql_select_db("$db")or die("Cannot select DB");
+	$connection = mysqli_connect($host, $username, $password, $db)or die('could not connect to database');
+	$database = mysqli_select_db($connection, $db)or die("Cannot select DB");
 
 	$user_sign = $_POST['user_sign'];
 	$pass_sign = $_POST['pass_sign'];
@@ -116,10 +116,10 @@ if(isset($_POST['user_sign']) && isset($_POST['pass_sign']))
 				FROM users 
 				WHERE username = '$user_sign' AND password = '$pass_sign' ";
 		
-	$results = mysql_query($query);
+	$results = mysqli_query($connection, $query);
 	
 	//return total count
-	$profile_exist = mysql_num_rows($results); //total records
+	$profile_exist = mysqli_num_rows($results); //total records
 
 	//if value is more than 0, username is not available
 	if($profile_exist == 1) 
@@ -130,7 +130,7 @@ if(isset($_POST['user_sign']) && isset($_POST['pass_sign']))
 	}
 	else
 	{
-		mysql_close($connection);
+		mysqli_close($connection);
 		die("Invalid username and/or password!");
 	}
 }
