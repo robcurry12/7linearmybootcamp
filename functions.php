@@ -400,7 +400,7 @@
 	/**
 	 * Prints out all admins for the admin to look at
 	 */
-	function printAdminsForAdmin($user)
+	function printAdminsForAdmin()
 	{
 		$connection = mysqli_connect("localhost", "root", "", "7line")or die("Cannot connect"); 
 		$database = mysqli_select_db($connection,"7line")or die("Cannot select DB");
@@ -419,15 +419,59 @@
 		echo		"<tr>
 					<td class='admin_table_users_and_reports'>".$admin['username']. "<img src='images/admin.png' alt='Admin' style='height: 20px'/></td>
 					<td class='admin_table_users_and_reports'>".date_format(new DateTime($admin['became_admin']),'n/j/y')."</td>
-					<td class='admin_table_users_and_reports'>";
-					if($user != $admin['username'])
-					{
-						echo "<img class='remove_admin' data-user-type='".$admin['username']."' style='height: 20px; cursor: pointer' src='images/x.png' alt='Remove Admin' title='Remove Admin'/>";
-					}
-		echo "</td>			
+					<td class='admin_table_users_and_reports'>
+					<img class='remove_admin' data-user-type='".$admin['username']."' style='height: 20px; cursor: pointer' src='images/x.png' alt='Remove Admin' title='Remove Admin'/></td>			
 				</tr>";
 				endforeach;
 		echo	"</table>";
 	}
 
+	/**
+	 * Prints out all threads for admin
+	 */
+	function printThreadsForAdmin()
+	{
+		$connection = mysqli_connect("localhost", "root", "", "7line")or die("Cannot connect"); 
+		$database = mysqli_select_db($connection,"7line")or die("Cannot select DB");
+		
+		$threads_q = "SELECT subject, user_create, date_created, last_update, type, 
+					(SELECT count(p.post_id)
+					FROM posts p
+				    WHERE p.thread_id = t.thread_id) as num_replies,
+				    (SELECT board_name
+				    FROM boards b
+				    WHERE b.board_id = t.board_id) as board
+				    FROM threads t";
+		$threads = mysqli_query($connection, $threads_q);
+		
+		echo	"<script src='admin.js'></script>
+			<table class='admin_db_tables' id='threads_table'>
+				<tr>
+					<td class='admin_table_headers'><b>Board</b></td>
+					<td class='admin_table_headers'><b>Subject</b></td>
+					<td class='admin_table_headers'><b>Created By</b></td>
+					<td class='admin_table_headers'><b>Date Created</b></td>
+					<td class='admin_table_headers'><b>Last Update</b></td>
+					<td class='admin_table_headers'><b>Post Type</b></td>
+					<td class='admin_table_headers'><b>Replies</b></td>
+					<td class='admin_table_headers'><b>Actions</b></td>
+				</tr>";
+				foreach ($threads as $thread):
+	echo		"<tr>
+					<td class='admin_table_users_and_reports'>".$thread['board']."</td>
+					<td class='admin_table_users_and_reports'>".$thread['subject']."</td>
+					<td class='admin_table_users_and_reports'>".$thread['user_create'];
+														if(isAdmin($thread['user_create']))
+														{
+															echo "<img src='images/admin.png' alt='Admin' title='Admin' style='height: 20px' />";
+														}
+	echo			"<td class='admin_table_users_and_reports'>".date_format(new DateTime($thread['date_created']), 'n/j/y')."</td>
+					<td class='admin_table_users_and_reports'>".date_format(new DateTime($thread['last_update']), 'n/j/y')."</td>
+					<td class='admin_table_users_and_reports'>".$thread['type']."</td>
+					<td class='admin_table_users_and_reports'>".$thread['num_replies']."</td>
+					<td class='admin_table_users_and_reports'> This will be handled later </td>
+				</tr>";
+			endforeach;
+	echo	"</table>";	
+	}
 ?>
