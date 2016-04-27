@@ -8,9 +8,13 @@ $db= "7line"; // Database name
 	$database = mysqli_select_db($connection,$db)or die("Cannot select DB");
 	 
 	session_start();
+	$admin_loggedIn = false;
 	
 	$user_check = $_SESSION['loggedin_user'];						//Storing the username
-	
+	if((strtolower($user_check) == 'darrenmeenan') || (strtolower($user_check) == 'robcurry12'))
+	{
+		$admin_loggedIn = true;
+	}
 	$ses_query = mysqli_query($connection, "SELECT username						
 					FROM users
 					WHERE username = '$user_check'");		//Checking to see if username exists in DB
@@ -32,5 +36,5 @@ $db= "7line"; // Database name
 					
 		mysqli_query($connection, $last_active);
 	}   
-	
+	$user = $_SESSION['loggedin_user'];
 ?>

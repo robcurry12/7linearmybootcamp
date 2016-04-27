@@ -22,7 +22,5 @@
 	$timestamp = date("Y-m-d H:i:s");
 	mysqli_query($connection, $new_post); 
 	$page_num = ceil($total_posts / 12);
-
-	header("Location: post.php");
 	die();	
 ?>

@@ -55,8 +55,8 @@ if(isset($_POST["email"]))
 	}
 	
 	//try connect to db
-	$connection = mysql_connect($host, $username, $password)or die('could not connect to database');
-	$database = mysql_select_db("$db")or die("Cannot select DB");
+	$connection = mysqli_connect($host, $username, $password, $db)or die('could not connect to database');
+	$database = mysqli_select_db($connection, $db)or die("Cannot select DB");
 	
 	//trim and lowercase username
 	$newemail =  strtolower(trim($_POST["email"])); 

@@ -1,15 +1,8 @@
 <?php
-	$host = "localhost";
-	$username="root"; // Mysql username 
-	$password=""; // Mysql password
-	$db= "7line"; // Database name
-	
-	$connection = mysqli_connect($host, $username, $password, $db)or die('could not connect to database');
-	$database = mysqli_select_db($connection, $db)or die("Cannot select DB");
+	include('connection_info.php');
 	
 	$user = $_POST['user'];
-	$post_id = $_POST['post_id'];
-	$increment = $_POST['like_count'];	
+	$post_id = $_POST['post_id'];	
 	$post_user = $_POST['post_user'];
 	
 	$add_like = "INSERT INTO likes (post_id, user, post_user, time_liked)

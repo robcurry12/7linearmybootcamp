@@ -1,5 +1,6 @@
 <?php 
 	include("session.php"); 
+	$loggedIn_user = $_SESSION['loggedin_user'];
 	$user = $_GET['profile'];
 
 	$info_query = 	"SELECT DATE_FORMAT(date_join, '%c/%e/%y') AS date_join,
@@ -94,7 +95,7 @@
 		<li><a href="board_home.php">Forum</a></li> <!--- List all of the discussion posts --->
 		<li>Messages</li>
 		<li><a href="the7line.com/shop">Shop</a></li>
-		<li><a href="logout.php">Log Out</a></li>
+		<li><a href="logout.php">Log Out <span id="loggedIn_user">(<?php echo $loggedIn_user; ?>)</span></a></li>
 	</ul>
 
 	<div id="user_home">

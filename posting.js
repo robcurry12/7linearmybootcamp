@@ -6,6 +6,7 @@ $(document).ready(function()
 		$("#threads").css("display", "none");
 		$(this).css("display", "none");
 		$("#title").css("display","none");
+		$("#p_paging").css("display", "none");
 	});
 	
 	$("#thread_exit").click(function()
@@ -14,8 +15,12 @@ $(document).ready(function()
 		$("#threads").css("display", "");
 		$("#title").css("display", "block");
 		$("#new_thread").css("display", "block");
+		$("#poll_post").attr("checked", false);
+		$("#p_paging").css("display", "block");
 	});
 	
+	
+	//Includes poll posting
 	$("#post_thread").click(function()
 	{
 		var subject = $("#new_subj").val();
@@ -170,265 +175,31 @@ $(document).ready(function()
 	            success: function(result) 
 	            {
 	            	$("textarea#content").val('');
-	            	window.location.href="post.php";
-	  				return false;
+	           		window.location.href="post.php?board_id=" + board + "&thread_id=" + thread;
+	  				return;
 	           }
       		});
 		}
 	});
 	
-	$("#like-1").click(function()
+	$(".like").click(function()
 	{
-		var like_count = $("#like_amount-1").val();
-		var post_id = $("#post_id-1").val();
+		var post_id = $(this).attr('data-postId-type');
+		var post_user = $(this).attr('data-userCreate-type');
 		var user = $("#user").val();
-		var post_user = $("#quote_user1").val();
-		
-		
 		$.ajax
 			({
 	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
+	            data: "user=" + user + "&post_id=" + post_id + "&post_user=" + post_user,
 	            url: "increment_like.php",
 	            success: function(result) 
 	            {
-	            	$("#like_ct-1").html(result);
-	            	$("#like_amount-1").val(result);
+	            	$("#like_ct-" + post_id).html(result);
 	  				return;
 	           }
       		});
 	});
-	$("#like-2").click(function()
-	{
-		var like_count = $("#like_amount-2").val();
-		var post_id = $("#post_id-2").val();
-		var user = $("#user").val();
-		var post_user = $("#quote_user2").val();
-		
-		$.ajax
-			({
-	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
-	            url: "increment_like.php",
-	            success: function(result) 
-	            {
-	            	$("#like_ct-2").html(result);
-	            	$("#like_amount-2").val(result);
-	  				return;
-	           }
-      		});
-	});
-	$("#like-3").click(function()
-	{
-		var like_count = $("#like_amount-3").val();
-		var post_id = $("#post_id-3").val();
-		var user = $("#user").val();
-		var post_user = $("#quote_user3").val();
-		 
-		
-		$.ajax
-			({
-	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
-	            url: "increment_like.php",
-	            success: function(result) 
-	            {
-	            	$("#like_ct-3").html(result);
-	            	$("#like_amount-3").val(result);
-	  				return;
-	           }
-      		});
-	});
-	$("#like-4").click(function()
-	{
-		var like_count = $("#like_amount-4").val();
-		var post_id = $("#post_id-4").val();
-		var user = $("#user").val();
-		var post_user = $("#quote_user4").val();
-		 
-		
-		$.ajax
-			({
-	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
-	            url: "increment_like.php",
-	            success: function(result) 
-	            {
-	            	$("#like_ct-4").html(result);
-	            	$("#like_amount-4").val(result);
-	  				return;
-	           }
-      		});
-	});
-	$("#like-5").click(function()
-	{
-		var like_count = $("#like_amount-5").val();
-		var post_id = $("#post_id-5").val();
-		var user = $("#user").val();
-		var post_user = $("#quote_user5").val();
-		 
-		
-		$.ajax
-			({
-	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
-	            url: "increment_like.php",
-	            success: function(result) 
-	            {
-	            	$("#like_ct-5").html(result);
-	            	$("#like_amount-5").val(result);
-	  				return;
-	           }
-      		});
-	});
-	$("#like-6").click(function()
-	{
-		var like_count = $("#like_amount-6").val();
-		var post_id = $("#post_id-6").val();
-		var user = $("#user").val();
-		var post_user = $("#quote_user6").val();
-		 
-		
-		$.ajax
-			({
-	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
-	            url: "increment_like.php",
-	            success: function(result) 
-	            {
-	            	$("#like_ct-6").html(result);
-	            	$("#like_amount-6").val(result);
-	  				return;
-	           }
-      		});
-	});
-	$("#like-7").click(function()
-	{
-		var like_count = $("#like_amount-7").val();
-		var post_id = $("#post_id-7").val();
-		var user = $("#user").val();
-		var post_user = $("#quote_user7").val();
-		 
-		
-		$.ajax
-			({
-	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
-	            url: "increment_like.php",
-	            success: function(result) 
-	            {
-	            	$("#like_ct-7").html(result);
-	            	$("#like_amount-7").val(result);
-	  				return;
-	           }
-      		});
-	});
-	$("#like-8").click(function()
-	{
-		var like_count = $("#like_amount-8").val();
-		var post_id = $("#post_id-8").val();
-		var user = $("#user").val();
-		var post_user = $("#quote_user8").val();
-		 
-		
-		$.ajax
-			({
-	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
-	            url: "increment_like.php",
-	            success: function(result) 
-	            {
-	            	$("#like_ct-8").html(result);
-	            	$("#like_amount-8").val(result);
-	  				return;
-	           }
-      		});
-	});
-	$("#like-9").click(function()
-	{
-		var like_count = $("#like_amount-9").val();
-		var post_id = $("#post_id-9").val();
-		var user = $("#user").val();
-		var post_user = $("#quote_user9").val();
-		 
-		
-		$.ajax
-			({
-	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
-	            url: "increment_like.php",
-	            success: function(result) 
-	            {
-	            	$("#like_ct-9").html(result);
-	            	$("#like_amount-9").val(result);
-	  				return;
-	           }
-      		});
-	});
-	$("#like-10").click(function()
-	{
-		var like_count = $("#like_amount-10").val();
-		var post_id = $("#post_id-10").val();
-		var user = $("#user").val();
-		var post_user = $("#quote_user10").val();
-		 
-		
-		$.ajax
-			({
-	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
-	            url: "increment_like.php",
-	            success: function(result) 
-	            {
-	            	$("#like_ct-10").html(result);
-	            	$("#like_amount-10").val(result);
-	  				return;
-	           }
-      		});
-	});
-	$("#like-11").click(function()
-	{
-		var like_count = $("#like_amount-11").val();
-		var post_id = $("#post_id-11").val();
-		var user = $("#user").val();
-		var post_user = $("#quote_user11").val();
-		 
-		
-		$.ajax
-			({
-	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
-	            url: "increment_like.php",
-	            success: function(result) 
-	            {
-	            	$("#like_ct-11").html(result);
-	            	$("#like_amount-11").val(result);
-	  				return;
-	           }
-      		});
-	});
-	$("#like-12").click(function()
-	{
-		var like_count = $("#like_amount-12").val();
-		var post_id = $("#post_id-12").val();
-		var user = $("#user").val();
-		var post_user = $("#quote_user12").val();
-		 
-		
-		$.ajax
-			({
-	            type: "POST",
-	            data: "user=" + user + "&post_id=" + post_id + "&like_count=" + like_count + "&post_user=" + post_user,
-	            url: "increment_like.php",
-	            success: function(result) 
-	            {
-	            	$("#like_ct-12").html(result);
-	            	$("#like_amount-12").val(result);
-	  				return;
-	           }
-      		});
-	});
-	
+	//Polling START
 	$("#poll_post").click(function()
 	{
 		if($("#poll_post").is(':checked'))
@@ -475,6 +246,7 @@ $(document).ready(function()
 		$("#post_thread").removeAttr("disabled");
 	});
 	
+	//Voting in poll
 	$("#poll_opt1").click(function()
 	{
 		var user = $("#voter").val();
@@ -551,5 +323,80 @@ $(document).ready(function()
 	           }
       		});
 	})
+	//Polling END
 	
+	//Reporting START
+	$(".flag").click(function()
+	{
+		var reported_user = $(this).attr('data-reportedUser-type');
+		var post_id = $(this).attr('data-postId-type');
+		var reported_content = $("#content" + post_id).val()
+		var post_type = $(this).attr('data-postType-type');
+		var user_reported = $("#user").val();
+		var thread_id = $("#post_thread_id").val();
+		var board_id = $("#post_board_id").val();
+		
+		$("#report_post").css('display', 'inline-block');
+		$("#thread_posts").css('display', 'none');
+		$('#reply_post').css('display', 'none');
+		$('#thread_subject').css('display', 'none');
+		$("#poll").css('display', 'none');
+		$("#report_exit").css('display', 'block');
+		$("#p_paging").css('display', 'none');
+		$("#bold_user").html(reported_user);
+		$("#report_content").html(reported_content);
+		$("#reported_user").val(reported_user);
+		$("#reported_content").val(reported_content);
+		$("#reporter").val(user_reported);
+		$("#r_thread_id").val(thread_id);
+		$("#r_board_id").val(board_id);
+		$("#r_post_id").val(post_id);
+		
+	});
+	$("#submit_report").click(function()
+	{
+		var reported_user = $("#reported_user").val();
+		var reported_content = $("#reported_content").val();
+		var user = $("#reporter").val();
+		var thread_id = $("#r_thread_id").val();
+		var board_id = $("#r_board_id").val();
+		var post_id = $("#r_post_id").val();
+		
+		var reason = "";
+		var selected = $("input[type='radio'][name='reporting']:checked");
+		if (selected.length > 0) 
+		{
+    		reason = selected.val();
+		}
+		else
+		{
+			$("#report_error").html('Please select a reason for reporting this post');
+			return;
+		}
+		$.ajax
+			({
+	            type: "POST",
+	            data: "user=" + user + "&reported_user=" + reported_user + "&reported_content=" + reported_content + "&thread_id=" + thread_id + 
+	            "&board_id=" + board_id + "&post_id=" + post_id + "&reason=" + reason,
+	            url: "send_report.php",
+	            success: function(result) 
+	            {
+	            	window.location.href="post.php?board_id=" + board_id + "&thread_id=" + thread_id;
+	  				return;
+	           }
+      		});
+	});
+	$("#report_exit").click(function()
+	{
+		$("#report_post").css('display', 'none');
+		$("#thread_posts").css('display', 'block');
+		$('#reply_post').css('display', 'block');
+		$('#thread_subject').css('display', 'block');
+		$("#poll").css('display', 'block');
+		$("#report_exit").css('display', 'none');
+		$(".report").prop('checked', false);
+	});
+	//Reporting END
 });
+
+
