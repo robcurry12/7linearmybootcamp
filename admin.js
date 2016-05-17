@@ -22,6 +22,7 @@ $(document).ready(function()
 		return;
 		
 	});
+	
 	//Make user admin
 	$("#users_table").on('click', '.make_admin', function()
 	{
@@ -38,10 +39,18 @@ $(document).ready(function()
 	           	}
       		});
 	});
+	
 	//Removing admin capabilities
 	$("#admins_table").on('click', '.remove_admin', function()
 	{
 		var remove_admin = $(this).attr('data-user-type');
+		var current_user = $("#protect_against_self_remove").val();
+		
+		if(current_user.toLowerCase() == remove_admin.toLowerCase())
+		{
+			alert("You cannot remove yourself as admin!");
+			return;
+		}
 		var user = $("#current_user").val();
 		$.ajax
 			({
@@ -54,4 +63,91 @@ $(document).ready(function()
 	           	}
       		});
 	});
+
+	//Moving threads
+	$('select').on('change', function()
+	{
+		var move_to_board = $(this).val();
+		var thread_id = $(this).attr('data-thread_id-type');
+		$.ajax
+			({
+	            type: "POST",
+	            data: "move_to_board=" + move_to_board + "&thread_id=" + thread_id,
+	            url: "move_thread.php",
+	            success: function(result) 
+	            {
+	            	$("#users_reports_tables_div").html(result);
+	           	}
+      		});
+		
+	});
+		
+	//Deleting threads from admin section
+	$("#threads_table").on('click', '.deleting', function()
+	{
+		var delete_thread_id = $(this).attr('data-thread-type');
+		$.ajax
+			({
+	            type: "POST",
+	            data: "delete_thread=" + delete_thread_id,
+	            url: "delete_thread.php",
+	            success: function(result) 
+	            {
+	            	$("#users_reports_tables_div").html(result);
+	           	}
+      		});
+	});
+
+	//Make threads sticky from admin section
+	$("#threads_table").on('click', '.stickying', function()
+	{
+		var sticky_thread = $(this).attr('data-thread-type');
+		var board_id = $(this).attr('data-board-type');
+		$.ajax
+			({
+	            type: "POST",
+	            data: "sticky_thread=" + sticky_thread + "&board_id=" + board_id,
+	            url: "sticky_thread.php",
+	            success: function(result) 
+	            {
+	            	$("#users_reports_tables_div").html(result);
+	           	}
+      		});
+	});
+	
+	//Lock threads from admin section
+	$("#threads_table").on('click', '.locking', function()
+	{
+		var lock_thread = $(this).attr('data-thread-type');
+		var board_id = $(this).attr('data-board-type');
+		$.ajax
+			({
+	            type: "POST",
+	            data: "lock_thread=" + lock_thread + "&board_id=" + board_id,
+	            url: "lock_thread.php",
+	            success: function(result) 
+	            {
+	            	$("#users_reports_tables_div").html(result);
+	           	}
+      		});
+		
+	});
+	
+	$(".admin_db_tables").on('click', '.ordering', function()
+	{
+		var order_by = $(this).attr('data-order-type');
+		var order_board = $(this).attr('data-board-type');
+		alert(order_by);
+		$.ajax
+			({
+	            type: "POST",
+	            data: "order_by=" + order_by + "&order_board=" + order_board,
+	            url: "order_tables.php",
+	            success: function(result) 
+	            {
+	            	$("#users_reports_tables_div").html(result);	
+	           	}
+      		});
+      		$(this).append("<img style='height: 15px' src='images/triangle.png'/>");
+	})
 });

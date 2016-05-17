@@ -128,7 +128,11 @@
 ?>
 		
 	<div id="board_posts">	
-		<h1 id="thread_subject"><?php echo $th_subject; ?></h1>
+		<h1 id="thread_subject"><?php if(isLocked($thread_id))
+									  {
+									  		echo "<img src='images/lock.png' alt='Locked Thread' style='height: 40px; vertical-align: middle;' />";			
+									  }
+									  	echo $th_subject; ?></h1>
 		<?php if($thread_type['type'] == 'poll')
 			  {
 			  		echo "<div id='poll'> <h4 id='poll_title'>".$poll_results['question']."</h4><ul id='poll_options'>"; 
@@ -209,17 +213,20 @@
 			<?php $paging = 'post.php?board_id='.$board_id.'&thread_id='.$thread_id.'&'; ?>
 			<?php  pagePosts($per_page, 3, $paging_query, $paging, $board_id); ?>
 		</div>
-		<div id="reply_post">
-				<h4>Post Reply <input type="submit" id="post_reply" value="Reply"/></h4>
-				<span id="reply-result"></span>
-				<textarea rows="8" cols="70" id="content"></textarea><span id="reply_content-result"></span><br>
-			
-				<input type="hidden" id="user" value="<?php echo $user; ?>"/>
-				<input type="hidden" id="board_id" value="<?php echo $board_id; ?>"/>
-				<input type="hidden" id="thread_id" value="<?php echo $thread_id; ?>"/>
-				<input type="hidden" value="<?php echo $page; ?>" id="page_num" />
-			</form>
-		</div>
+		<?php if (!isLocked($thread_id))
+		{ ?>
+			<div id='reply_post'>
+					<h4>Post Reply <input type='submit' id='post_reply' value='Reply'/></h4>
+					<span id='reply-result'></span>
+					<textarea rows='8' cols='70' id='content'></textarea><span id='reply_content-result'></span><br>
+				
+					<input type='hidden' id='user' value='".$user."'/>
+					<input type='hidden' id='board_id' value='".$board_id."'/>
+					<input type='hidden' id='thread_id' value='".$thread_id."'/>
+					<input type='hidden' value='".$page."' id='page_num' />
+				</form>
+			</div>
+		 <?php } ?>
 	</div>
 </body>
 </html>

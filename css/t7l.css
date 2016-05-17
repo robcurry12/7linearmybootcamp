@@ -664,7 +664,7 @@ body
 }
 #board_posts
 {
-    overflow: auto;   
+    overflow-x: auto;
     margin-left: auto;
     margin-right: auto;
     width: 80%;
@@ -690,6 +690,7 @@ body
     width: 100%;
     color: white;
     display: block;
+    marin-bottom: 5px;
 }
 #thread_posts tr:nth-child(odd)
 {
@@ -986,8 +987,10 @@ body
 }
 .paging
 {
+    float: right;
     text-align: right;
     margin-top: 8px;
+    margin-bottom: 10px;
 }
 .paging a
 {
@@ -1149,7 +1152,6 @@ body
 #span_cont
 {
     width: 375px;
-    display: block;
     margin-left: auto;
     margin-right: auto;
 }
@@ -1257,6 +1259,11 @@ body
     margin-left: auto;
     margin-right: auto;
 }
+#users_reports_tables_div a
+{
+    color: white;
+    text-decoration: none;
+}
 .admin_db_tables
 {
     width: 95%;
@@ -1272,6 +1279,10 @@ body
     text-align: center;
     color: white;
     height: 10px;
+}
+.admin_db_tables tr.db_subject
+{
+    text-align: left;
 }
 .admin_db_tables tr td img
 {
@@ -1319,4 +1330,11 @@ body
     display: inline-block;
     margin-bottom: 5px;
     color: #F0F0F0;
+}
+#show_threads
+{
+    float: right;
+    display: inline;
+    margin-top: -26px;
+    margin-right: 8px;
 }

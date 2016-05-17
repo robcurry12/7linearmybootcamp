@@ -290,6 +290,44 @@
 	 }
 	
 	/**
+	 * Determines if a thread is stickied
+	 */
+	 function isSticky($thread_id)
+	 {
+	 	$connection = mysqli_connect("localhost", "root", "", "7line")or die("Cannot connect"); 
+		$database = mysqli_select_db($connection,"7line")or die("Cannot select DB");
+	 	$isSticky_q = "SELECT * FROM stickys 
+	 				WHERE thread_id = '$thread_id'";
+					
+		$isSticky = mysqli_query($connection, $isSticky_q);
+		$_sticky = mysqli_num_rows($isSticky);
+		if($_sticky == 1)
+			return true;
+		else
+			return false;
+	 }
+	
+	/**
+	 * Determines if a thread is locked
+	 */
+	function isLocked($thread_id)
+	{
+		$connection = mysqli_connect("localhost", "root", "", "7line")or die("Cannot connect"); 
+		$database = mysqli_select_db($connection,"7line")or die("Cannot select DB");
+	 	$isLocked_q = "SELECT * FROM locked 
+	 				WHERE thread_id = '$thread_id'";
+					
+		$isLocked = mysqli_query($connection, $isLocked_q);
+		$_locked = mysqli_num_rows($isLocked);
+		if($_locked == 1)
+			return true;
+		else
+			return false;
+			
+		
+	}
+
+	/**
 	 * Prints out a table of all the users for the admin to look at
 	 */
 	function printUsersForAdmin()
@@ -308,13 +346,13 @@
 		echo "<script src='admin.js'></script>
 			  <table class='admin_db_tables' id='users_table'>
 				<tr>
-					<td class='admin_table_headers'><b>Username</b></td>
-					<td class='admin_table_headers'><b>Enlist Date</b></td>
-					<td class='admin_table_headers'><b>Gender</b></td>
-					<td class='admin_table_headers'><b>Birthday</b></td>
-					<td class='admin_table_headers'><b>Number of Posts</b></td>
-					<td class='admin_table_headers'><b>Last Active</b></td>
-					<td class='admin_table_headers'><b>Total Violations</b></td>
+					<td class='ordering admin_table_headers' data-board-type='users' data-order-type='username' ><b>Username</b></td>
+					<td class='ordering admin_table_headers' data-board-type='users' data-order-type='date_join'><b>Enlist Date</b></td>
+					<td class='ordering admin_table_headers' data-board-type='users' data-order-type='gender'><b>Gender</b></td>
+					<td class='ordering admin_table_headers' data-board-type='users' data-order-type='birthday'><b>Birthday</b></td>
+					<td class='ordering admin_table_headers' data-board-type='users' data-order-type='post_count'><b>Number of Posts</b></td>
+					<td class='ordering admin_table_headers' data-board-type='users' data-order-type='last_active'><b>Last Active</b></td>
+					<td class=' admin_table_headers' data-board-type='users' data-order-type=''><b>Total Violations</b></td>
 					<td class='admin_table_headers'><b>Actions</b></td>
 				</tr>";
 				foreach ($db_users as $db_user) :
@@ -358,11 +396,11 @@
 		echo "<script src='admin.js'></script>
 			<table class='admin_db_tables' id='reports_table'>
 			<tr>
-				<td class='admin_table_headers'><b>User Reported</b></td>
-				<td class='admin_table_headers'><b>Post Reported</b></td>
-				<td class='admin_table_headers'><b>Date Reported</b></td>
-				<td class='admin_table_headers'><b>User Reported</b></td>
-				<td class='admin_table_headers'><b>Reason</b></td>
+				<td class='ordering admin_table_headers' data-board-type='reports' data-order-type='reported_user'><b>User Reported</b></td>
+				<td class='ordering admin_table_headers' data-board-type='reports' data-order-type='reported_content'><b>Post Reported</b></td>
+				<td class='ordering admin_table_headers' data-board-type='reports' data-order-type='date_reported'><b>Date Reported</b></td>
+				<td class='ordering admin_table_headers' data-board-type='reports' data-order-type='reported_user'><b>User Reported</b></td>
+				<td class='ordering admin_table_headers' data-board-type='reports' data-order-type='reason'><b>Reason</b></td>
 			</tr>";
 			foreach ($reports as $report) : 
 			$post_link = 'post.php?board_id='.$report['board_id']. '&thread_id='.$report['thread_id']; //FIX THIS
@@ -411,8 +449,8 @@
 		echo "<script src='admin.js'></script>
 			<table class='admin_db_tables' id='admins_table'>
 				<tr>
-					<td class='admin_table_headers'><b>Username</b></td>
-					<td class='admin_table_headers'><b>Became Admin</b></td>
+					<td class='ordering admin_table_headers' data-order-type='username' data-board-type='admins'><b>Username</b></td>
+					<td class='ordering admin_table_headers' data-order-type='became_admin' data-board-type='admins'><b>Became Admin</b></td>
 					<td class='admin_table_headers'><b>Remove Admin</b></td>
 				</tr>";
 			foreach ($admins as $admin) :
@@ -434,44 +472,103 @@
 		$connection = mysqli_connect("localhost", "root", "", "7line")or die("Cannot connect"); 
 		$database = mysqli_select_db($connection,"7line")or die("Cannot select DB");
 		
-		$threads_q = "SELECT subject, user_create, date_created, last_update, type, 
+		$threads_q = "SELECT thread_id, subject, user_create, date_created, last_update, type, 
 					(SELECT count(p.post_id)
 					FROM posts p
 				    WHERE p.thread_id = t.thread_id) as num_replies,
 				    (SELECT board_name
 				    FROM boards b
-				    WHERE b.board_id = t.board_id) as board
-				    FROM threads t";
+				    WHERE b.board_id = t.board_id) as board,
+				    (SELECT board_id
+					FROM boards b
+					WHERE b.board_id = t.board_id) as board_id
+				    FROM threads t
+				    ORDER BY date_created";	
+	
 		$threads = mysqli_query($connection, $threads_q);
 		
-		echo	"<script src='admin.js'></script>
+		$boards_q = "SELECT * FROM boards";
+		$boards = mysqli_query($connection, $boards_q);
+		
+		echo	"<script src='admin.js'></script>	
 			<table class='admin_db_tables' id='threads_table'>
 				<tr>
-					<td class='admin_table_headers'><b>Board</b></td>
-					<td class='admin_table_headers'><b>Subject</b></td>
-					<td class='admin_table_headers'><b>Created By</b></td>
-					<td class='admin_table_headers'><b>Date Created</b></td>
-					<td class='admin_table_headers'><b>Last Update</b></td>
-					<td class='admin_table_headers'><b>Post Type</b></td>
-					<td class='admin_table_headers'><b>Replies</b></td>
+					<td class='ordering admin_table_headers' data-order-type='board' data-board-type='threads'><b>Board</b></td>
+					<td class='ordering admin_table_headers' data-order-type='subject' data-board-type='threads'><b>Subject</b></td>
+					<td class='ordering admin_table_headers' data-order-type='user_create' data-board-type='threads'><b>Created By</b></td>
+					<td class='ordering admin_table_headers' data-order-type='date_created' data-board-type='threads'><b>Date Created</b></td>
+					<td class='ordering admin_table_headers' data-order-type='last_update' data-board-type='threads'><b>Last Update</b></td>
+					<td class='ordering admin_table_headers' data-order-type='num_replies' data-board-type='threads'><b>Replies</b></td>
 					<td class='admin_table_headers'><b>Actions</b></td>
 				</tr>";
 				foreach ($threads as $thread):
-	echo		"<tr>
-					<td class='admin_table_users_and_reports'>".$thread['board']."</td>
-					<td class='admin_table_users_and_reports'>".$thread['subject']."</td>
-					<td class='admin_table_users_and_reports'>".$thread['user_create'];
-														if(isAdmin($thread['user_create']))
-														{
-															echo "<img src='images/admin.png' alt='Admin' title='Admin' style='height: 20px' />";
-														}
-	echo			"<td class='admin_table_users_and_reports'>".date_format(new DateTime($thread['date_created']), 'n/j/y')."</td>
-					<td class='admin_table_users_and_reports'>".date_format(new DateTime($thread['last_update']), 'n/j/y')."</td>
-					<td class='admin_table_users_and_reports'>".$thread['type']."</td>
-					<td class='admin_table_users_and_reports'>".$thread['num_replies']."</td>
-					<td class='admin_table_users_and_reports'> This will be handled later </td>
-				</tr>";
-			endforeach;
-	echo	"</table>";	
+		echo		"<tr>
+						<td class='admin_table_users_and_reports'>".$thread['board']."</td>
+						<td class='admin_table_users_and_reports' style='text-align: left; padding-left: 6px;'>";
+												if(isSticky($thread['thread_id']))
+												{
+													echo "<img src='images/sticky.png' alt='Sticky Thread' style='height: 20px; margin-right: 2px' />";	
+												}
+												if(isLocked($thread['thread_id']))
+												{
+													echo "<img src='images/lock.png' alt='Locked' style='height: 20px; margin-right: 2px' />";
+												}
+												if($thread['type'] == 'poll')
+												{
+													echo "<img src='images/poll.png' alt='Poll' style='height: 20px; margin-right: 5px;' />";
+												}
+												
+		echo			"<a href='post.php?board_id=".$thread['board_id']."&thread_id=".$thread['thread_id']."'>".$thread['subject']."</a></td>
+						<td class='admin_table_users_and_reports'>".$thread['user_create'];
+															if(isAdmin($thread['user_create']))
+															{
+																echo "<img src='images/admin.png' alt='Admin' title='Admin' style='height: 20px' />";
+															}
+		echo			"<td class='admin_table_users_and_reports'>".date_format(new DateTime($thread['date_created']), 'n/j/y')."</td>
+						<td class='admin_table_users_and_reports'>".date_format(new DateTime($thread['last_update']), 'n/j/y')."</td>
+						<td class='admin_table_users_and_reports'>".$thread['num_replies']."</td>
+						<td class='admin_table_users_and_reports'>	<select id='move_thread' data-thread_id-type='".$thread['thread_id']."'>
+																		<option selected='selected'>Move thread to</option>";
+																	foreach ($boards as $board) :
+		echo															"<option class='moving' value='".$board['board_id']."'>".$board['board_name']."</option>";
+																	endforeach;																
+		echo														"</select>
+																	<img class='deleting' data-thread-type='".$thread['thread_id']."' style='height: 20px; cursor: pointer;' src='images/x.png' alt='Delete Thread' title='Delete Thread'/>";
+																	if(isSticky($thread['thread_id']))
+																	{
+																		echo "<img class='stickying' data-thread-type='".$thread['thread_id']."' style='height: 20px; cursor: pointer;' src='images/remove_sticky.png' alt='Remove Sticky' title='Remove Sticky' data-board-type='".$thread['board_id']."'/>";	
+																	}
+																	else 
+																	{
+																		echo "<img class='stickying' data-thread-type='".$thread['thread_id']."' style='height: 20px; cursor: pointer;' src='images/sticky.png' alt='Make Sticky' title='Make Sticky' data-board-type='".$thread['board_id']."'/>";
+																	}
+																	if(isLocked($thread['thread_id']))
+																	{
+																		echo "<img class='locking' data-thread-type='".$thread['thread_id']."' style='height: 20px; cursor: pointer;' src='images/unlock.png' alt='Unlock Thread' title='Unlock Thread' data-board-type='".$thread['thread_id']."'/>";
+																	}
+																	else
+																	{
+																		echo "<img class='locking' data-thread-type='".$thread['thread_id']."' style='height: 20px; cursor: pointer;' src='images/lock.png' alt='Lock Thread' title='Lock Thread' data-board-type='".$thread['thread_id']."'/>";	
+																	}
+		echo 		"</td>																	
+					</tr>";
+				endforeach;
+		echo	"</table>";	
+	}
+
+	/**
+	 * Prints dropdown of all 
+	 */
+	function printBoardsInDropDown()
+	{
+		$connection = mysqli_connect("localhost", "root", "", "7line")or die("Cannot connect"); 
+		$database = mysqli_select_db($connection,"7line")or die("Cannot select DB");
+		
+		$boards_q =	"SELECT * FROM boards";
+		$boards = mysqli_query($connection, $boards_q);
+		
+		foreach ($boards as $board) :
+			echo "<option value='".$board['board_id']."'>".$board['board_name']."</option>";
+		endforeach;
 	}
 ?>

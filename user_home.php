@@ -117,7 +117,7 @@
 	
 	include('header.php');
 ?>
-
+	<script src="admin.js"></script>
 	<div id="user_home">
 		<?php if($admin_loggedIn == 1){ echo "<input type='button' id='admin_switch' value='Admin'/>";} ?>
 		<div id="user_info">

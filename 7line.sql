@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2016 at 10:45 PM
+-- Generation Time: May 17, 2016 at 04:50 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -36,7 +36,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`username`, `became_admin`) VALUES
-('DarrenMeenan', '2016-04-26 22:22:46'),
+('DarrenMeenan', '2016-04-27 13:27:23'),
 ('robcurry12', '2016-04-21 14:54:48');
 
 -- --------------------------------------------------------
@@ -114,6 +114,7 @@ INSERT INTO `likes` (`post_id`, `user`, `post_user`, `time_liked`) VALUES
 (61, 'alexbraunx3', 'robcurry12', '2016-04-21 19:57:09'),
 (61, 'chrislinguini56', 'robcurry12', '2016-04-07 19:46:41'),
 (69, 'darrenmeenan', 'robcurry12', '2016-04-04 19:38:14'),
+(69, 'robcurry12', 'robcurry12', '2016-04-27 02:50:06'),
 (71, 'chrislinguini56', 'robcurry12', '2016-04-12 18:09:41'),
 (71, 'DarrenMeenan', 'robcurry12', '2016-04-21 20:33:23'),
 (72, 'chrislinguini56', 'chrislinguini56', '2016-03-17 17:58:55'),
@@ -143,7 +144,9 @@ INSERT INTO `likes` (`post_id`, `user`, `post_user`, `time_liked`) VALUES
 (86, 'chrislinguini56', 'darrenmeenan', '2016-04-12 18:09:50'),
 (86, 'DarrenMeenan', 'darrenmeenan', '2016-04-21 20:33:26'),
 (87, 'darrenmeenan', 'darrenmeenan', '2016-04-04 19:38:16'),
+(87, 'robcurry12', 'darrenmeenan', '2016-04-27 02:50:01'),
 (90, 'DarrenMeenan', 'darrenmeenan', '2016-04-21 19:42:05'),
+(93, 'robcurry12', 'darrenmeenan', '2016-04-27 02:50:08'),
 (94, 'DarrenMeenan', 'DarrenMeenan', '2016-04-13 18:15:01'),
 (95, 'DarrenMeenan', 'DarrenMeenan', '2016-04-21 19:42:09'),
 (98, 'DarrenMeenan', 'DarrenMeenan', '2016-04-21 19:42:15'),
@@ -151,6 +154,25 @@ INSERT INTO `likes` (`post_id`, `user`, `post_user`, `time_liked`) VALUES
 (103, 'alexbraunx3', 'DarrenMeenan', '2016-04-21 20:21:28'),
 (104, 'alexbraunx3', 'DarrenMeenan', '2016-04-21 20:21:25'),
 (105, 'alexbraunx3', 'DarrenMeenan', '2016-04-21 20:21:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `locked`
+--
+
+CREATE TABLE `locked` (
+  `board_id` int(11) NOT NULL,
+  `thread_id` int(11) NOT NULL,
+  `date_locked` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `locked`
+--
+
+INSERT INTO `locked` (`board_id`, `thread_id`, `date_locked`) VALUES
+(7, 7, '2016-05-09 13:49:13');
 
 -- --------------------------------------------------------
 
@@ -255,17 +277,10 @@ INSERT INTO `posts` (`post_id`, `thread_id`, `board_id`, `subject`, `content`, `
 (18, 7, 2, '', 'Yay!', 'robcurry12', '2016-02-17 14:41:34', ''),
 (19, 7, 2, '', 'I did it!', 'robcurry12', '2016-02-17 20:33:11', ''),
 (20, 7, 2, '', 'Hi', 'robcurry12', '2016-02-18 16:03:31', ''),
-(21, 9, 2, 'Filling up the board', 'Hello', 'robcurry12', '2016-02-21 14:34:12', ''),
+(21, 9, 1, 'Filling up the board', 'Hello', 'robcurry12', '2016-02-21 14:34:12', ''),
 (22, 10, 2, 'I am lost and not sure where to start', 'Help me out', 'robcurry12', '2016-02-21 14:45:44', ''),
-(23, 11, 2, 'I am lost ', 'help', 'robcurry12', '2016-02-21 15:44:04', ''),
-(24, 12, 2, 'Meow', 'I am a cat', 'robcurry12', '2016-02-21 15:51:57', ''),
-(25, 13, 2, 'undefined', 'I like to eat pizza! What about you?! I like goats! Baaaaahhh', 'robcurry12', '2016-02-21 17:12:46', ''),
-(26, 14, 2, 'undefined', 'Can someone take my seat at an upcoming game?', 'robcurry12', '2016-02-22 13:03:54', ''),
-(27, 15, 2, 'undefined', 'Big bag of potatos', 'robcurry12', '2016-02-22 13:10:25', ''),
-(28, 16, 2, 'undefined', 'Lets Go Mets!', 'robcurry12', '2016-02-22 13:11:24', ''),
-(29, 17, 2, 'undefined', 'Rawr', 'robcurry12', '2016-02-22 13:13:30', ''),
 (30, 18, 2, 'Attempting to see whats wrong', 'Hi there!', 'robcurry12', '2016-02-22 13:57:17', ''),
-(31, 19, 2, 'Now let me try it in Chrome!', 'This worked in firefox now hopefully it works in CHROME', 'robcurry12', '2016-02-22 13:57:52', ''),
+(31, 19, 1, 'Now let me try it in Chrome!', 'This worked in firefox now hopefully it works in CHROME', 'robcurry12', '2016-02-22 13:57:52', ''),
 (32, 20, 2, 'Testing how long posts will look', '012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789', 'robcurry12', '2016-02-22 15:20:46', ''),
 (33, 21, 2, 'Testing the length of the post', 'dfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjddfgsagfsdfhjd', 'robcurry12', '2016-02-22 15:38:36', ''),
 (34, 7, 2, '', 'Hi', 'robcurry12', '2016-02-23 14:59:02', ''),
@@ -280,12 +295,10 @@ INSERT INTO `posts` (`post_id`, `thread_id`, `board_id`, `subject`, `content`, `
 (49, 7, 2, '', 'dfd', 'robcurry12', '2016-02-26 18:22:24', ''),
 (50, 7, 2, '', 'box', 'robcurry12', '2016-02-26 18:24:12', ''),
 (51, 21, 2, '', '123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890123467890', 'robcurry12', '2016-03-03 13:32:41', ''),
-(52, 22, 1, 'Outing Travel Tips Post #1', 'Hi all!', 'robcurry12', '2016-03-08 15:23:22', ''),
-(53, 23, 1, 'Mow Mow', 'Mow Mow', 'robcurry12', '2016-03-09 10:29:48', ''),
+(52, 22, 3, 'Outing Travel Tips Post #1', 'Hi all!', 'robcurry12', '2016-03-08 15:23:22', ''),
+(53, 23, 2, 'Mow Mow', 'Mow Mow', 'robcurry12', '2016-03-09 10:29:48', ''),
 (54, 24, 1, 'Meow', 'Meoooowww', 'robcurry12', '2016-03-09 10:38:04', ''),
-(55, 25, 4, 'Here is a poll', 'Poll', 'robcurry12', '2016-03-09 10:41:28', ''),
-(56, 26, 3, 'La Leche', 'The Milk', 'robcurry12', '2016-03-09 10:43:42', ''),
-(57, 27, 4, 'Here is another poll', 'Vote vote vote!', 'robcurry12', '2016-03-09 11:19:35', ''),
+(56, 26, 1, 'La Leche', 'The Milk', 'robcurry12', '2016-03-09 10:43:42', ''),
 (58, 28, 4, 'Tickets up fpr grabs?', 'Idk about this', 'robcurry12', '2016-03-09 11:22:49', ''),
 (59, 29, 1, 'Mike Trout', 'Mike Trout should be a met', 'robcurry12', '2016-03-09 11:56:32', ''),
 (60, 30, 4, 'Missing hash tags ugh', 'Cant believe i missed hashtags', 'robcurry12', '2016-03-09 12:04:38', ''),
@@ -301,10 +314,9 @@ INSERT INTO `posts` (`post_id`, `thread_id`, `board_id`, `subject`, `content`, `
 (75, 41, 2, '', 'You gotta rep LI bro! #LetsGoMatz', 'joeyg_hd', '2016-03-10 15:50:57', ''),
 (76, 41, 2, '', 'Wow its a 4 way tie!', 'robcurry12', '2016-03-14 15:07:59', ''),
 (77, 41, 2, '', 'Here we go!', 'robcurry12', '2016-03-14 15:09:54', ''),
-(78, 19, 2, '', 'Yes it worked!', 'robcurry12', '2016-03-15 18:32:09', ''),
+(78, 19, 1, '', 'Yes it worked!', 'robcurry12', '2016-03-15 18:32:09', ''),
 (79, 42, 2, 'Attire for tomorrow', 'What should I wear?', 'robcurry12', '2016-03-28 13:13:11', 'poll'),
 (80, 43, 2, 'New Recruit Thread', 'Welcome everyone! Here is where you can introduce yourself to The 7 Line Army and meet other 7 Line Soldiers.', 'robcurry12', '2016-03-28 13:14:08', ''),
-(81, 44, 2, 'New Thread', 'New content', 'robcurry12', '2016-03-28 14:02:28', ''),
 (82, 45, 1, 'Fresh Fitted Friday', 'Which hat should I put up for sale', 'darrenmeenan', '2016-03-31 15:16:26', 'poll'),
 (84, 47, 1, 'T-Shirt Idea', 'Which player should the next tshirt be made about?', 'darrenmeenan', '2016-03-31 15:40:09', 'poll'),
 (85, 48, 4, 'Testing out length of poll question', 'Woohoo', 'darrenmeenan', '2016-03-31 15:55:08', 'poll'),
@@ -376,6 +388,27 @@ CREATE TABLE `requests` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `stickys`
+--
+
+CREATE TABLE `stickys` (
+  `board_id` int(11) NOT NULL,
+  `thread_id` int(11) NOT NULL,
+  `date_stickied` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `stickys`
+--
+
+INSERT INTO `stickys` (`board_id`, `thread_id`, `date_stickied`) VALUES
+(2, 7, '2016-05-09 13:49:04'),
+(2, 41, '2016-05-03 16:00:27'),
+(2, 43, '2016-05-03 16:12:02');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `threads`
 --
 
@@ -386,48 +419,39 @@ CREATE TABLE `threads` (
   `user_create` varchar(100) NOT NULL,
   `last_update` datetime NOT NULL,
   `date_created` datetime NOT NULL,
-  `type` varchar(100) NOT NULL
+  `type` varchar(100) NOT NULL,
+  `isSticky` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `threads`
 --
 
-INSERT INTO `threads` (`thread_id`, `board_id`, `subject`, `user_create`, `last_update`, `date_created`, `type`) VALUES
-(7, 2, 'Trying out my new posting method', 'robcurry12', '2016-02-13 10:43:03', '2016-02-13 10:43:03', ''),
-(9, 2, 'Filling up the board', 'robcurry12', '2016-02-21 14:34:12', '2016-02-21 14:34:12', ''),
-(10, 2, 'I am lost and not sure where to start', 'robcurry12', '2016-02-21 14:45:44', '2016-02-21 14:45:44', ''),
-(11, 2, 'I am lost ', 'robcurry12', '2016-02-21 15:44:04', '2016-02-21 15:44:04', ''),
-(12, 2, 'Meow', 'robcurry12', '2016-02-21 15:51:57', '2016-02-21 15:51:57', ''),
-(13, 2, 'undefined', 'robcurry12', '2016-02-21 17:12:46', '2016-02-21 17:12:46', ''),
-(14, 2, 'undefined', 'robcurry12', '2016-02-22 13:03:54', '2016-02-22 13:03:54', ''),
-(15, 2, 'undefined', 'robcurry12', '2016-02-22 13:10:25', '2016-02-22 13:10:25', ''),
-(16, 2, 'undefined', 'robcurry12', '2016-02-22 13:11:24', '2016-02-22 13:11:24', ''),
-(17, 2, 'undefined', 'robcurry12', '2016-02-22 13:13:30', '2016-02-22 13:13:30', ''),
-(18, 2, 'Attempting to see whats wrong', 'robcurry12', '2016-02-22 13:57:17', '2016-02-22 13:57:17', ''),
-(19, 2, 'Now let me try it in Chrome!', 'robcurry12', '2016-02-22 13:57:52', '2016-02-22 13:57:52', ''),
-(21, 2, 'Testing the length of the post', 'robcurry12', '2016-02-22 15:38:36', '2016-02-22 15:38:36', ''),
-(22, 1, 'Outing Travel Tips Post #1', 'robcurry12', '2016-03-08 15:23:21', '2016-03-08 15:23:21', ''),
-(23, 1, 'Mow Mow', 'robcurry12', '2016-03-09 10:29:48', '2016-03-09 10:29:48', ''),
-(24, 1, 'Meow', 'robcurry12', '2016-03-09 10:38:04', '2016-03-09 10:38:04', ''),
-(25, 4, 'Here is a poll', 'robcurry12', '2016-03-09 10:41:28', '2016-03-09 10:41:28', ''),
-(26, 3, 'La Leche', 'robcurry12', '2016-03-09 10:43:42', '2016-03-09 10:43:42', ''),
-(27, 4, 'Here is another poll', 'robcurry12', '2016-03-09 11:19:35', '2016-03-09 11:19:35', ''),
-(28, 4, 'Tickets up fpr grabs?', 'robcurry12', '2016-03-09 11:22:49', '2016-03-09 11:22:49', ''),
-(29, 1, 'Mike Trout', 'robcurry12', '2016-03-09 11:56:31', '2016-03-09 11:56:31', ''),
-(30, 4, 'Missing hash tags ugh', 'robcurry12', '2016-03-09 12:04:37', '2016-03-09 12:04:37', ''),
-(31, 1, 'Does Bryce Harper suck', 'robcurry12', '2016-03-09 12:06:57', '2016-03-09 12:06:57', ''),
-(32, 3, 'Lets Go Mets', 'robcurry12', '2016-03-09 12:31:02', '2016-03-09 12:31:02', ''),
-(35, 4, 'Missed Game', 'robcurry12', '2016-03-09 12:50:28', '2016-03-09 12:50:28', ''),
-(38, 3, 'Bro', 'robcurry12', '2016-03-09 13:02:55', '2016-03-09 13:02:55', 'poll'),
-(39, 3, 'Answer the question ladies', 'robcurry12', '2016-03-09 13:28:08', '2016-03-09 13:28:08', 'poll'),
-(41, 2, '4 Aces', 'robcurry12', '2016-03-09 22:33:29', '2016-03-09 22:33:29', 'poll'),
-(42, 2, 'Attire for tomorrow', 'robcurry12', '2016-03-28 13:13:11', '2016-03-28 13:13:11', 'poll'),
-(43, 2, 'New Recruit Thread', 'robcurry12', '2016-03-28 13:14:08', '2016-03-28 13:14:08', 'sticky'),
-(44, 2, 'New Thread', 'robcurry12', '2016-03-28 14:02:28', '2016-03-28 14:02:28', ''),
-(45, 1, 'Fresh Fitted Friday', 'darrenmeenan', '2016-03-31 15:16:26', '2016-03-31 15:16:26', 'poll'),
-(47, 1, 'T-Shirt Idea', 'darrenmeenan', '2016-03-31 15:40:09', '2016-03-31 15:40:09', 'poll'),
-(48, 4, 'Testing out length of poll question', 'darrenmeenan', '2016-03-31 15:55:08', '2016-03-31 15:55:08', 'poll');
+INSERT INTO `threads` (`thread_id`, `board_id`, `subject`, `user_create`, `last_update`, `date_created`, `type`, `isSticky`) VALUES
+(7, 2, 'Trying out my new posting method', 'robcurry12', '2016-02-13 10:43:03', '2016-02-13 10:43:03', '', 1),
+(9, 1, 'Filling up the board', 'robcurry12', '2016-02-21 14:34:12', '2016-02-21 14:34:12', '', 0),
+(10, 2, 'I am lost and not sure where to start', 'robcurry12', '2016-02-21 14:45:44', '2016-02-21 14:45:44', '', 0),
+(18, 2, 'Attempting to see whats wrong', 'robcurry12', '2016-02-22 13:57:17', '2016-02-22 13:57:17', '', 0),
+(19, 1, 'Now let me try it in Chrome!', 'robcurry12', '2016-02-22 13:57:52', '2016-02-22 13:57:52', '', 0),
+(21, 2, 'Testing the length of the post', 'robcurry12', '2016-02-22 15:38:36', '2016-02-22 15:38:36', '', 0),
+(22, 3, 'Outing Travel Tips Post #1', 'robcurry12', '2016-03-08 15:23:21', '2016-03-08 15:23:21', '', 0),
+(23, 2, 'Mow Mow', 'robcurry12', '2016-03-09 10:29:48', '2016-03-09 10:29:48', '', 0),
+(24, 1, 'Meow', 'robcurry12', '2016-03-09 10:38:04', '2016-03-09 10:38:04', '', 0),
+(26, 1, 'La Leche', 'robcurry12', '2016-03-09 10:43:42', '2016-03-09 10:43:42', '', 0),
+(28, 4, 'Tickets up fpr grabs?', 'robcurry12', '2016-03-09 11:22:49', '2016-03-09 11:22:49', '', 0),
+(29, 1, 'Mike Trout', 'robcurry12', '2016-03-09 11:56:31', '2016-03-09 11:56:31', '', 0),
+(30, 4, 'Missing hash tags ugh', 'robcurry12', '2016-03-09 12:04:37', '2016-03-09 12:04:37', '', 0),
+(31, 1, 'Does Bryce Harper suck', 'robcurry12', '2016-03-09 12:06:57', '2016-03-09 12:06:57', '', 0),
+(32, 3, 'Lets Go Mets', 'robcurry12', '2016-03-09 12:31:02', '2016-03-09 12:31:02', '', 0),
+(35, 4, 'Missed Game', 'robcurry12', '2016-03-09 12:50:28', '2016-03-09 12:50:28', '', 0),
+(38, 3, 'Bro', 'robcurry12', '2016-03-09 13:02:55', '2016-03-09 13:02:55', 'poll', 0),
+(39, 3, 'Answer the question ladies', 'robcurry12', '2016-03-09 13:28:08', '2016-03-09 13:28:08', 'poll', 0),
+(41, 2, '4 Aces', 'robcurry12', '2016-03-09 22:33:29', '2016-03-09 22:33:29', 'poll', 1),
+(42, 2, 'Attire for tomorrow', 'robcurry12', '2016-03-28 13:13:11', '2016-03-28 13:13:11', 'poll', 0),
+(43, 2, 'New Recruit Thread', 'robcurry12', '2016-03-28 13:14:08', '2016-03-28 13:14:08', '', 1),
+(45, 1, 'Fresh Fitted Friday', 'darrenmeenan', '2016-03-31 15:16:26', '2016-03-31 15:16:26', 'poll', 0),
+(47, 1, 'T-Shirt Idea', 'darrenmeenan', '2016-03-31 15:40:09', '2016-03-31 15:40:09', 'poll', 0),
+(48, 4, 'Testing out length of poll question', 'darrenmeenan', '2016-03-31 15:55:08', '2016-03-31 15:55:08', 'poll', 0);
 
 -- --------------------------------------------------------
 
@@ -469,8 +493,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `last_active`, `logg
 (14, 'nym', 'nym@mets.com', 'e10adc3949ba59abbe56', '2016-01-28 21:56:16', 1, NULL, '2016-01-28', '0000-', '', ''),
 (15, 'yoisback', 'yoisback@mets.com', 'e10adc3949ba59abbe56', '2016-01-28 21:58:08', 1, NULL, '2016-01-28', '0000-', '', ''),
 (16, 'captainamerica', 'nyca@mets.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-29 15:37:39', 1, NULL, '2016-01-28', '0000-', '', ''),
-(18, 'robcurry12', 'robcurry12@gmail.com', '0422eeda16890d9fdf17c472fc600297', '2016-04-26 22:43:26', 1, 'robcurry12.jpg', '2016-01-29', '06/19', 'male', ''),
-(19, 'chrislinguini56', 'cxc13@dowling.edu', '20d256a57b9bcf3e6e80f2cf35c9f23e', '2016-04-19 14:35:55', 0, 'chrislinguini56.jpg', '2016-03-10', '03/23', 'male', ''),
+(18, 'robcurry12', 'robcurry12@gmail.com', '0422eeda16890d9fdf17c472fc600297', '2016-05-11 00:03:55', 1, 'robcurry12.jpg', '2016-01-29', '06/19', 'male', ''),
+(19, 'chrislinguini56', 'cxc13@dowling.edu', '20d256a57b9bcf3e6e80f2cf35c9f23e', '2016-04-28 16:53:37', 0, 'chrislinguini56.jpg', '2016-03-10', '03/23', 'male', ''),
 (20, 'alexbraunx3', 'abraun@gmail.com', '20d256a57b9bcf3e6e80f2cf35c9f23e', '2016-04-21 16:26:36', 0, 'alexbraunx3.jpg', '2016-03-10', '04/10', 'female', ''),
 (21, 'joeyg_hd', 'joeyg_hd@gmail.com', '20d256a57b9bcf3e6e80f2cf35c9f23e', '2016-03-10 16:05:19', 1, 'joeyg_hd.jpg', '2016-03-10', '07/08', 'male', ''),
 (22, 'DarrenMeenan', '7linegeneral@t7l.com', '0422eeda16890d9fdf17c472fc600297', '2016-04-25 21:19:50', 1, 'DarrenMeenan.jpg', '2016-03-29', '01/04', 'male', '');
@@ -497,6 +521,7 @@ INSERT INTO `votes` (`vote_id`, `poll_id`, `user`, `voted_for`, `date_voted`) VA
 (39, 0, 'darrenmeenan', 1, '2016-04-04 13:33:57'),
 (7, 5, 'robcurry12', 1, '2016-03-09 15:37:27'),
 (36, 6, 'darrenmeenan', 1, '2016-04-04 12:08:56'),
+(40, 6, 'robcurry12', 2, '2016-04-26 22:49:58'),
 (30, 8, 'alexbraunx3', 3, '2016-03-10 15:20:12'),
 (27, 8, 'chrislinguini56', 1, '2016-03-10 13:39:37'),
 (34, 8, 'darrenmeenan', 2, '2016-04-04 11:08:44'),
@@ -529,6 +554,12 @@ ALTER TABLE `likes`
   ADD PRIMARY KEY (`post_id`,`user`);
 
 --
+-- Indexes for table `locked`
+--
+ALTER TABLE `locked`
+  ADD PRIMARY KEY (`thread_id`);
+
+--
 -- Indexes for table `outings`
 --
 ALTER TABLE `outings`
@@ -557,6 +588,12 @@ ALTER TABLE `reports`
 --
 ALTER TABLE `requests`
   ADD PRIMARY KEY (`request_id`,`thread_id`,`post_id`,`user_requested`);
+
+--
+-- Indexes for table `stickys`
+--
+ALTER TABLE `stickys`
+  ADD PRIMARY KEY (`thread_id`);
 
 --
 -- Indexes for table `threads`
@@ -620,7 +657,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `vote_id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `vote_id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,8 +1,23 @@
 <?php
-$host = "localhost";
-$username="root"; // Mysql username 
-$password=""; // Mysql password
-$db= "7line"; // Database name
+	function checkAdmin($username)
+	 {
+	 	$connection = mysqli_connect("localhost", "root", "", "7line")or die("Cannot connect"); 
+		$database = mysqli_select_db($connection,"7line")or die("Cannot select DB");
+	 	$isAdmin_q = "SELECT username
+	 				FROM admins
+	 				WHERE username = '$username'";
+		$isAdmin = mysqli_query($connection, $isAdmin_q);
+		$_admin = mysqli_num_rows($isAdmin);
+		if($_admin == 1)
+			return true;
+		else
+			return false;
+	 }
+	
+	$host = "localhost";
+	$username="root"; // Mysql username 
+	$password=""; // Mysql password
+	$db= "7line"; // Database name
 
 	$connection = mysqli_connect("$host", "$username", "$password", "$db")or die("Cannot connect"); 
 	$database = mysqli_select_db($connection,$db)or die("Cannot select DB");
@@ -11,7 +26,7 @@ $db= "7line"; // Database name
 	$admin_loggedIn = false;
 	
 	$user_check = $_SESSION['loggedin_user'];						//Storing the username
-	if((strtolower($user_check) == 'darrenmeenan') || (strtolower($user_check) == 'robcurry12'))
+	if(checkAdmin($user_check))
 	{
 		$admin_loggedIn = true;
 	}

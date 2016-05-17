@@ -12,6 +12,7 @@
 		</div>
 		<div id="users_reports_tables_div">
 			<?php printAdminsForAdmin(); ?>
+			<input type="hidden" id="protect_against_self_remove" value="<?php echo $user; ?>" />
 		</div>
 	</div>
 </body>

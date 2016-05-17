@@ -49,7 +49,7 @@
 					WHERE t.thread_id = p.thread_id) AS post_count
 					FROM threads t
 					WHERE board_id = '$board_id'
-					ORDER BY (type = 'sticky') DESC, last_update DESC
+					ORDER BY (isSticky = 1) DESC, last_update DESC
 					LIMIT $start_from, $per_page";
 					
 	$results = $db->query($threads_query);
@@ -78,14 +78,16 @@
 			<?php foreach ($results as $result) : ?>
 			<?php $thread_link = "post.php?board_id=".$board_id."&thread_id=".$result['thread_id']; ?>	
 				<tr class="thread_row">
-					<td class="thds subject">	<?php if($result['type'] == "poll") echo "<img class='poll_thread' style='height: 15px' src='images/poll.png'>"; ?>
-												<?php if($result['type'] == "sticky") echo "<img class='poll_thread' style='height: 15px' src='images/sticky.png'>"; ?>
+					<td class="thds subject">	<?php if(isSticky($result['thread_id'])) echo "<img class='poll_thread' style='height: 15px' src='images/sticky.png'>"; ?>
+												<?php if(isLocked($result['thread_id'])) echo "<img src='images/lock.png' alt='Locked' style='height: 20px; vertical-align: middle;' />"; ?>
+												<?php if($result['type'] == "poll") echo "<img class='poll_thread' style='height: 15px' src='images/poll.png'>"; ?>
 						<a class="link_btn" href="<?php echo $thread_link; ?>"><?php echo $result['subject']; ?></a></td>
 					<td class="thds threads"><a class="link_btn thread_link" href="<?php echo $thread_link; ?>"> <?php echo $result['user_create']; ?></a></td>
 					<td class="thds threads"><a class="link_btn thread_link" href="<?php echo $thread_link; ?>"> <?php echo date_format(new DateTime($result['last_update']), 'n/j/y g:i A'); ?></a></td>
 					<td class="thds threads"><a class="link_btn thread_link" href="<?php echo $thread_link; ?>"> <?php echo $result['post_count']; ?> </a></td>
 				</tr>
 			<?php endforeach ?>
+			<input type="hidden" id="board_id" value="<?php echo $board_id; ?>"/>
 		</table>
 		
 		<div class="paging thread_page" id="p_paging">
